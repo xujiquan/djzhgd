@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.djzhgd.project.system.mapper.ZxMechanicalInfoMapper">
+
+    <resultMap type="ZxMechanicalInfo" id="ZxMechanicalInfoResult">
+        <result property="mechanicalId"    column="mechanical_id"    />
+        <result property="deptId"    column="dept_id"    />
+        <result property="parentId"    column="parent_id"    />
+        <result property="mechanicalType"    column="mechanical_type"    />
+        <result property="userType"    column="user_type"    />
+        <result property="specificType"    column="specific_type"    />
+        <result property="mechanicalModel"    column="mechanical_model"    />
+        <result property="power"    column="power"    />
+        <result property="tpIsPractices"    column="tp_is_practices"    />
+        <result property="tpIsBigThick"    column="tp_is_big_thick"    />
+        <result property="ylTonnage"    column="yl_tonnage"    />
+        <result property="remark"    column="remark"    />
+        <result property="status"    column="status"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectZxMechanicalInfoVo">
+        select mechanical_id, dept_id, parent_id, mechanical_type, user_type, specific_type, mechanical_model, power, tp_is_practices, tp_is_big_thick, yl_tonnage, remark, status, del_flag, create_by, create_time, update_by, update_time from zx_mechanical_info
+    </sql>
+
+    <select id="selectZxMechanicalInfoList" parameterType="ZxMechanicalInfo" resultMap="ZxMechanicalInfoResult">
+        <include refid="selectZxMechanicalInfoVo"/>
+        <where>
+    <!--        <if test="deptId != null "> and dept_id = #{deptId}</if>-->
+            <if test="deptId != null and deptId != 0">
+                AND (dept_id = #{deptId} OR dept_id IN ( SELECT t.dept_id FROM sys_dept t WHERE
+
+                instr(','||ancestors||',',',${deptId},') <![CDATA[ >]]>0 ))
+            </if>
+            <if test="parentId != null "> and parent_id = #{parentId}</if>
+            <if test="mechanicalType != null  and mechanicalType != ''"> and mechanical_type = #{mechanicalType}</if>
+            <if test="userType != null  and userType != ''"> and user_type = #{userType}</if>
+            <if test="specificType != null  and specificType != ''"> and specific_type = #{specificType}</if>
+            <if test="mechanicalModel != null  and mechanicalModel != ''"> and mechanical_model like  '%' || #{mechanicalMode} || '%'</if>
+            <if test="power != null  and power != ''"> and power = #{power}</if>
+            <if test="tpIsPractices != null  and tpIsPractices != ''"> and tp_is_practices = #{tpIsPractices}</if>
+            <if test="tpIsBigThick != null  and tpIsBigThick != ''"> and tp_is_big_thick = #{tpIsBigThick}</if>
+            <if test="ylTonnage != null  and ylTonnage != ''"> and yl_tonnage = #{ylTonnage}</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+            ${dataScope}
+        </where>
+        order by create_time desc
+    </select>
+
+    <select id="selectZxMechanicalInfoById" parameterType="Long" resultMap="ZxMechanicalInfoResult">
+        <include refid="selectZxMechanicalInfoVo"/>
+        where mechanical_id = #{mechanicalId}
+    </select>
+
+    <insert id="insertZxMechanicalInfo" parameterType="ZxMechanicalInfo" useGeneratedKeys="true" keyProperty="mechanicalId">
+        insert into zx_mechanical_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="deptId != null ">dept_id,</if>
+            <if test="parentId != null ">parent_id,</if>
+            <if test="mechanicalType != null  and mechanicalType != ''">mechanical_type,</if>
+            <if test="userType != null  and userType != ''">user_type,</if>
+            <if test="specificType != null  and specificType != ''">specific_type,</if>
+            <if test="mechanicalModel != null  and mechanicalModel != ''">mechanical_model,</if>
+            <if test="power != null  and power != ''">power,</if>
+            <if test="tpIsPractices != null  and tpIsPractices != ''">tp_is_practices,</if>
+            <if test="tpIsBigThick != null  and tpIsBigThick != ''">tp_is_big_thick,</if>
+            <if test="ylTonnage != null  and ylTonnage != ''">yl_tonnage,</if>
+            <if test="remark != null  and remark != ''">remark,</if>
+            <if test="status != null  and status != ''">status,</if>
+            <if test="delFlag != null  and delFlag != ''">del_flag,</if>
+            <if test="createBy != null  and createBy != ''">create_by,</if>
+            <if test="createTime != null ">create_time,</if>
+            <if test="updateBy != null  and updateBy != ''">update_by,</if>
+            <if test="updateTime != null ">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="deptId != null ">#{deptId},</if>
+            <if test="parentId != null ">#{parentId},</if>
+            <if test="mechanicalType != null  and mechanicalType != ''">#{mechanicalType},</if>
+            <if test="userType != null  and userType != ''">#{userType},</if>
+            <if test="specificType != null  and specificType != ''">#{specificType},</if>
+            <if test="mechanicalModel != null  and mechanicalModel != ''">#{mechanicalModel},</if>
+            <if test="power != null  and power != ''">#{power},</if>
+            <if test="tpIsPractices != null  and tpIsPractices != ''">#{tpIsPractices},</if>
+            <if test="tpIsBigThick != null  and tpIsBigThick != ''">#{tpIsBigThick},</if>
+            <if test="ylTonnage != null  and ylTonnage != ''">#{ylTonnage},</if>
+            <if test="remark != null  and remark != ''">#{remark},</if>
+            <if test="status != null  and status != ''">#{status},</if>
+            <if test="delFlag != null  and delFlag != ''">#{delFlag},</if>
+            <if test="createBy != null  and createBy != ''">#{createBy},</if>
+            <if test="createTime != null ">#{createTime},</if>
+            <if test="updateBy != null  and updateBy != ''">#{updateBy},</if>
+            <if test="updateTime != null ">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateZxMechanicalInfo" parameterType="ZxMechanicalInfo">
+        update zx_mechanical_info
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="deptId != null ">dept_id = #{deptId},</if>
+            <if test="parentId != null ">parent_id = #{parentId},</if>
+            <if test="mechanicalType != null  and mechanicalType != ''">mechanical_type = #{mechanicalType},</if>
+            <if test="userType != null  and userType != ''">user_type = #{userType},</if>
+            <if test="specificType != null  and specificType != ''">specific_type = #{specificType},</if>
+            <if test="mechanicalModel != null  and mechanicalModel != ''">mechanical_model = #{mechanicalModel},</if>
+            <if test="power != null  and power != ''">power = #{power},</if>
+            <if test="tpIsPractices != null  and tpIsPractices != ''">tp_is_practices = #{tpIsPractices},</if>
+            <if test="tpIsBigThick != null  and tpIsBigThick != ''">tp_is_big_thick = #{tpIsBigThick},</if>
+            <if test="ylTonnage != null  and ylTonnage != ''">yl_tonnage = #{ylTonnage},</if>
+            <if test="remark != null  and remark != ''">remark = #{remark},</if>
+            <if test="status != null  and status != ''">status = #{status},</if>
+            <if test="delFlag != null  and delFlag != ''">del_flag = #{delFlag},</if>
+            <if test="createBy != null  and createBy != ''">create_by = #{createBy},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+            <if test="updateBy != null  and updateBy != ''">update_by = #{updateBy},</if>
+            <if test="updateTime != null ">update_time = #{updateTime},</if>
+        </trim>
+        where mechanical_id = #{mechanicalId}
+    </update>
+
+    <delete id="deleteZxMechanicalInfoById" parameterType="Long">
+        delete from zx_mechanical_info where mechanical_id = #{mechanicalId}
+    </delete>
+
+    <delete id="deleteZxMechanicalInfoByIds" parameterType="String">
+        delete from zx_mechanical_info where mechanical_id in
+        <foreach item="mechanicalId" collection="array" open="(" separator="," close=")">
+            #{mechanicalId}
+        </foreach>
+    </delete>
+
+</mapper>

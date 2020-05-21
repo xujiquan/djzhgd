@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.djzhgd.project.system.mapper.ZxSyFunctionRoomInfoMapper">
+
+    <resultMap type="ZxSyFunctionRoomInfo" id="ZxSyFunctionRoomInfoResult">
+        <result property="roomId"    column="room_id"    />
+        <result property="deptId"    column="dept_id"    />
+        <result property="parentId"    column="parent_id"    />
+        <result property="laboratoryId"    column="laboratory_id"    />
+        <result property="roomName"    column="room_name"    />
+        <result property="roomType"    column="room_type"    />
+        <result property="area"    column="area"    />
+        <result property="testItems"    column="test_items"    />
+        <result property="isEnvironment"    column="is_environment"    />
+        <result property="remark"    column="remark"    />
+        <result property="status"    column="status"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectZxSyFunctionRoomInfoVo">
+        select room_id, dept_id, parent_id, laboratory_id, room_name, room_type, area, test_items, is_environment, remark, status, del_flag, create_by, create_time, update_by, update_time from zx_sy_function_room_info
+    </sql>
+
+    <select id="selectZxSyFunctionRoomInfoList" parameterType="ZxSyFunctionRoomInfo" resultMap="ZxSyFunctionRoomInfoResult">
+        <include refid="selectZxSyFunctionRoomInfoVo"/>
+        <where>
+<!--            <if test="deptId != null "> and dept_id = #{deptId}</if>-->
+            <if test="deptId != null and deptId != 0">
+                AND (dept_id = #{deptId} OR dept_id IN ( SELECT t.dept_id FROM sys_dept t WHERE instr(','||ancestors||',',',${deptId},') <![CDATA[ >]]>0 ))
+            </if>
+            <if test="parentId != null "> and parent_id = #{parentId}</if>
+            <if test="laboratoryId != null  and laboratoryId != ''"> and laboratory_id = #{laboratoryId}</if>
+            <if test="roomName != null  and roomName != ''"> and room_name like  '%' || #{roomName} || '%'</if>
+            <if test="roomType != null  and roomType != ''"> and room_type = #{roomType}</if>
+            <if test="area != null  and area != ''"> and area = #{area}</if>
+            <if test="testItems != null  and testItems != ''"> and test_items = #{testItems}</if>
+            <if test="isEnvironment != null  and isEnvironment != ''"> and is_environment = #{isEnvironment}</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+        </where>
+        order by create_time desc
+     
+    </select>
+
+    <select id="selectZxSyFunctionRoomInfoById" parameterType="Long" resultMap="ZxSyFunctionRoomInfoResult">
+        <include refid="selectZxSyFunctionRoomInfoVo"/>
+        where room_id = #{roomId}
+    </select>
+
+    <insert id="insertZxSyFunctionRoomInfo" parameterType="ZxSyFunctionRoomInfo" useGeneratedKeys="true" keyProperty="roomId">
+        insert into zx_sy_function_room_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="deptId != null ">dept_id,</if>
+            <if test="parentId != null ">parent_id,</if>
+            <if test="laboratoryId != null  and laboratoryId != ''">laboratory_id,</if>
+            <if test="roomName != null  and roomName != ''">room_name,</if>
+            <if test="roomType != null  and roomType != ''">room_type,</if>
+            <if test="area != null  and area != ''">area,</if>
+            <if test="testItems != null  and testItems != ''">test_items,</if>
+            <if test="isEnvironment != null  and isEnvironment != ''">is_environment,</if>
+            <if test="remark != null  and remark != ''">remark,</if>
+            <if test="status != null  and status != ''">status,</if>
+            <if test="delFlag != null  and delFlag != ''">del_flag,</if>
+            <if test="createBy != null  and createBy != ''">create_by,</if>
+            <if test="createTime != null ">create_time,</if>
+            <if test="updateBy != null  and updateBy != ''">update_by,</if>
+            <if test="updateTime != null ">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="deptId != null ">#{deptId},</if>
+            <if test="parentId != null ">#{parentId},</if>
+            <if test="laboratoryId != null  and laboratoryId != ''">#{laboratoryId},</if>
+            <if test="roomName != null  and roomName != ''">#{roomName},</if>
+            <if test="roomType != null  and roomType != ''">#{roomType},</if>
+            <if test="area != null  and area != ''">#{area},</if>
+            <if test="testItems != null  and testItems != ''">#{testItems},</if>
+            <if test="isEnvironment != null  and isEnvironment != ''">#{isEnvironment},</if>
+            <if test="remark != null  and remark != ''">#{remark},</if>
+            <if test="status != null  and status != ''">#{status},</if>
+            <if test="delFlag != null  and delFlag != ''">#{delFlag},</if>
+            <if test="createBy != null  and createBy != ''">#{createBy},</if>
+            <if test="createTime != null ">#{createTime},</if>
+            <if test="updateBy != null  and updateBy != ''">#{updateBy},</if>
+            <if test="updateTime != null ">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateZxSyFunctionRoomInfo" parameterType="ZxSyFunctionRoomInfo">
+        update zx_sy_function_room_info
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="deptId != null ">dept_id = #{deptId},</if>
+            <if test="parentId != null ">parent_id = #{parentId},</if>
+            <if test="laboratoryId != null  and laboratoryId != ''">laboratory_id = #{laboratoryId},</if>
+            <if test="roomName != null  and roomName != ''">room_name = #{roomName},</if>
+            <if test="roomType != null  and roomType != ''">room_type = #{roomType},</if>
+            <if test="area != null  and area != ''">area = #{area},</if>
+            <if test="testItems != null  and testItems != ''">test_items = #{testItems},</if>
+            <if test="isEnvironment != null  and isEnvironment != ''">is_environment = #{isEnvironment},</if>
+            <if test="remark != null  and remark != ''">remark = #{remark},</if>
+            <if test="status != null  and status != ''">status = #{status},</if>
+            <if test="delFlag != null  and delFlag != ''">del_flag = #{delFlag},</if>
+            <if test="createBy != null  and createBy != ''">create_by = #{createBy},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+            <if test="updateBy != null  and updateBy != ''">update_by = #{updateBy},</if>
+            <if test="updateTime != null ">update_time = #{updateTime},</if>
+        </trim>
+        where room_id = #{roomId}
+    </update>
+
+    <delete id="deleteZxSyFunctionRoomInfoById" parameterType="Long">
+        delete from zx_sy_function_room_info where room_id = #{roomId}
+    </delete>
+
+    <delete id="deleteZxSyFunctionRoomInfoByIds" parameterType="String">
+        delete from zx_sy_function_room_info where room_id in
+        <foreach item="roomId" collection="array" open="(" separator="," close=")">
+            #{roomId}
+        </foreach>
+    </delete>
+
+</mapper>

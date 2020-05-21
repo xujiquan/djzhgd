@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.djzhgd.project.system.mapper.ZxMaterialInfoMapper">
+    
+    <resultMap type="ZxMaterialInfo" id="ZxMaterialInfoResult">
+        <result property="materialId"    column="material_id"    />
+        <result property="deptId"    column="dept_id"    />
+        <result property="parentId"    column="parent_id"    />
+        <result property="materialType"    column="material_type"    />
+        <result property="materialName"    column="material_name"    />
+        <result property="companyName"    column="company_name"    />
+        <result property="companyAddress"    column="company_address"    />
+        <result property="businessScope"    column="business_scope"    />
+        <result property="production"    column="production"    />
+        <result property="distance"    column="distance"    />
+        <result property="otherDistance"    column="other_distance"    />
+        <result property="transportation"    column="transportation"    />
+        <result property="structure"    column="structure"    />
+        <result property="detailedType"    column="detailed_type"    />
+        <result property="materialModel"    column="material_model"    />
+        <result property="indicators"    column="indicators"    />
+        <result property="attachment"    column="attachment"    />
+        <result property="remark"    column="remark"    />
+        <result property="status"    column="status"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectZxMaterialInfoVo">
+        select material_id, dept_id, parent_id, material_type, material_name, company_name, company_address, business_scope, production, distance, other_distance, transportation, structure, detailed_type, material_model, indicators, attachment, remark, status, del_flag, create_by, create_time, update_by, update_time from zx_material_info
+    </sql>
+
+    <select id="selectZxMaterialInfoList" parameterType="ZxMaterialInfo" resultMap="ZxMaterialInfoResult">
+        <include refid="selectZxMaterialInfoVo"/>
+        <where>  
+            <if test="deptId != null "> and dept_id = #{deptId}</if>
+            <if test="parentId != null "> and parent_id = #{parentId}</if>
+            <if test="materialType != null  and materialType != ''"> and material_type = #{materialType}</if>
+            <if test="materialName != null  and materialName != ''"> and material_name like  '%' || #{materialName} || '%'</if>
+            <if test="companyName != null  and companyName != ''"> and company_name like  '%' || #{companyName} || '%'</if>
+            <if test="companyAddress != null  and companyAddress != ''"> and company_address = #{companyAddress}</if>
+            <if test="businessScope != null  and businessScope != ''"> and business_scope = #{businessScope}</if>
+            <if test="production != null  and production != ''"> and production = #{production}</if>
+            <if test="distance != null  and distance != ''"> and distance = #{distance}</if>
+            <if test="otherDistance != null  and otherDistance != ''"> and other_distance = #{otherDistance}</if>
+            <if test="transportation != null  and transportation != ''"> and transportation = #{transportation}</if>
+            <if test="structure != null  and structure != ''"> and structure = #{structure}</if>
+            <if test="detailedType != null  and detailedType != ''"> and detailed_type = #{detailedType}</if>
+            <if test="materialModel != null  and materialModel != ''"> and material_model = #{materialModel}</if>
+            <if test="indicators != null  and indicators != ''"> and indicators = #{indicators}</if>
+            <if test="attachment != null  and attachment != ''"> and attachment = #{attachment}</if>
+            <if test="remark != null  and remark != ''"> and remark = #{remark}</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+            <if test="delFlag != null  and delFlag != ''"> and del_flag = #{delFlag}</if>
+            <if test="createBy != null  and createBy != ''"> and create_by like  '%' || #{createBy} || '%'</if>
+            <if test="params.beginCreateTime != null and params.beginCreateTime != '' and params.endCreateTime != null and params.endCreateTime != ''"> and create_time between #{params.beginCreateTime} and #{params.endCreateTime}</if>
+            <if test="updateBy != null  and updateBy != ''"> and update_by = #{updateBy}</if>
+            <if test="updateTime != null "> and update_time = #{updateTime}</if>
+        </where>
+        order by create_time desc
+    </select>
+    
+    <select id="selectZxMaterialInfoById" parameterType="Long" resultMap="ZxMaterialInfoResult">
+        <include refid="selectZxMaterialInfoVo"/>
+        where material_id = #{materialId}
+    </select>
+        
+    <insert id="insertZxMaterialInfo" parameterType="ZxMaterialInfo" useGeneratedKeys="true" keyProperty="materialId">
+        insert into zx_material_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="deptId != null ">dept_id,</if>
+            <if test="parentId != null ">parent_id,</if>
+            <if test="materialType != null  and materialType != ''">material_type,</if>
+            <if test="materialName != null  and materialName != ''">material_name,</if>
+            <if test="companyName != null  and companyName != ''">company_name,</if>
+            <if test="companyAddress != null  and companyAddress != ''">company_address,</if>
+            <if test="businessScope != null  and businessScope != ''">business_scope,</if>
+            <if test="production != null  and production != ''">production,</if>
+            <if test="distance != null  and distance != ''">distance,</if>
+            <if test="otherDistance != null  and otherDistance != ''">other_distance,</if>
+            <if test="transportation != null  and transportation != ''">transportation,</if>
+            <if test="structure != null  and structure != ''">structure,</if>
+            <if test="detailedType != null  and detailedType != ''">detailed_type,</if>
+            <if test="materialModel != null  and materialModel != ''">material_model,</if>
+            <if test="indicators != null  and indicators != ''">indicators,</if>
+            <if test="attachment != null  and attachment != ''">attachment,</if>
+            <if test="remark != null  and remark != ''">remark,</if>
+            <if test="status != null  and status != ''">status,</if>
+            <if test="delFlag != null  and delFlag != ''">del_flag,</if>
+            <if test="createBy != null  and createBy != ''">create_by,</if>
+            <if test="createTime != null ">create_time,</if>
+            <if test="updateBy != null  and updateBy != ''">update_by,</if>
+            <if test="updateTime != null ">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="deptId != null ">#{deptId},</if>
+            <if test="parentId != null ">#{parentId},</if>
+            <if test="materialType != null  and materialType != ''">#{materialType},</if>
+            <if test="materialName != null  and materialName != ''">#{materialName},</if>
+            <if test="companyName != null  and companyName != ''">#{companyName},</if>
+            <if test="companyAddress != null  and companyAddress != ''">#{companyAddress},</if>
+            <if test="businessScope != null  and businessScope != ''">#{businessScope},</if>
+            <if test="production != null  and production != ''">#{production},</if>
+            <if test="distance != null  and distance != ''">#{distance},</if>
+            <if test="otherDistance != null  and otherDistance != ''">#{otherDistance},</if>
+            <if test="transportation != null  and transportation != ''">#{transportation},</if>
+            <if test="structure != null  and structure != ''">#{structure},</if>
+            <if test="detailedType != null  and detailedType != ''">#{detailedType},</if>
+            <if test="materialModel != null  and materialModel != ''">#{materialModel},</if>
+            <if test="indicators != null  and indicators != ''">#{indicators},</if>
+            <if test="attachment != null  and attachment != ''">#{attachment},</if>
+            <if test="remark != null  and remark != ''">#{remark},</if>
+            <if test="status != null  and status != ''">#{status},</if>
+            <if test="delFlag != null  and delFlag != ''">#{delFlag},</if>
+            <if test="createBy != null  and createBy != ''">#{createBy},</if>
+            <if test="createTime != null ">#{createTime},</if>
+            <if test="updateBy != null  and updateBy != ''">#{updateBy},</if>
+            <if test="updateTime != null ">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateZxMaterialInfo" parameterType="ZxMaterialInfo">
+        update zx_material_info
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="deptId != null ">dept_id = #{deptId},</if>
+            <if test="parentId != null ">parent_id = #{parentId},</if>
+            <if test="materialType != null  and materialType != ''">material_type = #{materialType},</if>
+            <if test="materialName != null  and materialName != ''">material_name = #{materialName},</if>
+            <if test="companyName != null  and companyName != ''">company_name = #{companyName},</if>
+            <if test="companyAddress != null  and companyAddress != ''">company_address = #{companyAddress},</if>
+            <if test="businessScope != null  and businessScope != ''">business_scope = #{businessScope},</if>
+            <if test="production != null  and production != ''">production = #{production},</if>
+            <if test="distance != null  and distance != ''">distance = #{distance},</if>
+            <if test="otherDistance != null  and otherDistance != ''">other_distance = #{otherDistance},</if>
+            <if test="transportation != null  and transportation != ''">transportation = #{transportation},</if>
+            <if test="structure != null  and structure != ''">structure = #{structure},</if>
+            <if test="detailedType != null  and detailedType != ''">detailed_type = #{detailedType},</if>
+            <if test="materialModel != null  and materialModel != ''">material_model = #{materialModel},</if>
+            <if test="indicators != null  and indicators != ''">indicators = #{indicators},</if>
+            <if test="attachment != null  and attachment != ''">attachment = #{attachment},</if>
+            <if test="remark != null  and remark != ''">remark = #{remark},</if>
+            <if test="status != null  and status != ''">status = #{status},</if>
+            <if test="delFlag != null  and delFlag != ''">del_flag = #{delFlag},</if>
+            <if test="createBy != null  and createBy != ''">create_by = #{createBy},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+            <if test="updateBy != null  and updateBy != ''">update_by = #{updateBy},</if>
+            <if test="updateTime != null ">update_time = #{updateTime},</if>
+        </trim>
+        where material_id = #{materialId}
+    </update>
+
+    <delete id="deleteZxMaterialInfoById" parameterType="Long">
+        delete from zx_material_info where material_id = #{materialId}
+    </delete>
+
+    <delete id="deleteZxMaterialInfoByIds" parameterType="String">
+        delete from zx_material_info where material_id in 
+        <foreach item="materialId" collection="array" open="(" separator="," close=")">
+            #{materialId}
+        </foreach>
+    </delete>
+    
+</mapper>

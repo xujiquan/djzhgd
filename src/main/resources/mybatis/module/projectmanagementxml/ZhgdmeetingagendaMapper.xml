@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.djzhgd.module.projectmanagement.mapper.ZhgdmeetingagendaMapper">
+  <resultMap id="BaseResultMap" type="com.djzhgd.module.projectmanagement.domain.Zhgdmeetingagenda">
+    <result column="ID" jdbcType="DECIMAL" property="id" />
+    <result column="DEPT_ID" jdbcType="DECIMAL" property="deptId" />
+    <result column="TENANT_ID" jdbcType="DECIMAL" property="tenantId" />
+    <result column="LEADER" jdbcType="VARCHAR" property="leader" />
+    <result column="FILE_PATH" jdbcType="VARCHAR" property="filePath" />
+    <result column="NODE" jdbcType="VARCHAR" property="node" />
+    <result column="TITLE" jdbcType="VARCHAR" property="title" />
+    <result column="PARENT_ID" jdbcType="VARCHAR" property="parentId" />
+    <result column="LEADER_ID" jdbcType="VARCHAR" property="leaderId" />
+    <result column="DISABLED" jdbcType="DECIMAL" property="disabled" />
+    <result column="CREATE_USERID" jdbcType="VARCHAR" property="createUserid" />
+    <result column="CREATE_USERNAME" jdbcType="VARCHAR" property="createUsername" />
+    <result column="CREATE_IP" jdbcType="VARCHAR" property="createIp" />
+    <result column="CREATE_DATETIME" jdbcType="TIMESTAMP" property="createDatetime" />
+    <result column="UPDATE_USERID" jdbcType="VARCHAR" property="updateUserid" />
+    <result column="UPDATE_USERNAME" jdbcType="VARCHAR" property="updateUsername" />
+    <result column="UPDATE_IP" jdbcType="VARCHAR" property="updateIp" />
+    <result column="UPDATE_DATETIME" jdbcType="TIMESTAMP" property="updateDatetime" />
+    <result column="CONTENT" jdbcType="CLOB" property="content" />
+  </resultMap>
+
+  <sql id="selectZhgdmeetingagendaVo">
+    select  id,dept_id,tenant_id,leader,file_path,node,title,parent_id,leader_id,disabled,create_userid,create_username,
+            create_ip,create_datetime,update_userid,update_username,update_ip,update_datetime,content from ZHGD_MEETING_AGENDA
+  </sql>
+
+</mapper>

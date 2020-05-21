@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.djzhgd.project.system.mapper.ZxPatrolBackMapper">
+
+    <resultMap type="ZxPatrolBack" id="ZxPatrolBackResult">
+        <result property="patrolBackId"    column="patrol_back_id"    />
+        <result property="deptId"    column="dept_id"    />
+        <result property="parentId"    column="parent_id"    />
+        <result property="patrolId"    column="patrol_id"    />
+        <result property="pileNo"    column="pile_no"    />
+
+        <result property="patrolFrontName"    column="patrol_front_name"    />
+
+        <result property="distance"    column="distance"    />
+        <result property="constructionStructure"    column="construction_structure"    />
+        <result property="setWithType"    column="set_with_type"    />
+        <result property="isCover"    column="is_cover"    />
+        <result property="coverDetails"    column="cover_details"    />
+        <result property="isTransportTemperature"    column="is_transport_temperature"    />
+        <result property="transportTemperatureDetails"    column="transport_temperature_details"    />
+        <result property="pavingWay"    column="paving_way"    />
+        <result property="balancedWay"    column="balanced_way"    />
+        <result property="isSpacing"    column="is_spacing"    />
+        <result property="spacingDetails"    column="spacing_details"    />
+        <result property="pavingTemperature"    column="paving_temperature"    />
+        <result property="isPavingSituation"    column="is_paving_situation"    />
+        <result property="pavingDetails"    column="paving_details"    />
+        <result property="isPavingResults"    column="is_paving_results"    />
+
+        <result property="pavingResultsDetails"    column="paving_results_details"    />
+
+        <result property="oneRccTemperature"    column="one_rcc_temperature"    />
+        <result property="twoRccTemperature"    column="two_rcc_temperature"    />
+        <result property="threeRccTemperature"    column="three_rcc_temperature"    />
+        <result property="oneRccSpeed"    column="one_rcc_speed"    />
+        <result property="twoRccSpeed"    column="two_rcc_speed"    />
+        <result property="threeRccSpeed"    column="three_rcc_speed"    />
+        <result property="oneRccPass"    column="one_rcc_pass"    />
+        <result property="twoRccPass"    column="two_rcc_pass"    />
+        <result property="threeRccPass"    column="three_rcc_pass"    />
+        <result property="dataAnalysis"    column="data_analysis"    />
+        <result property="patrolBackIssue"    column="patrol_back_issue"    />
+        <result property="remark"    column="remark"    />
+        <result property="status"    column="status"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectZxPatrolBackVo">
+        select patrol_back_id, dept_id, parent_id, patrol_id,patrol_front_name, pile_no,paving_results_details, distance, construction_structure, set_with_type, is_cover, cover_details, is_transport_temperature, transport_temperature_details, paving_way, balanced_way, is_spacing, spacing_details, paving_temperature, is_paving_situation, paving_details, is_paving_results, one_rcc_temperature, two_rcc_temperature, three_rcc_temperature, one_rcc_speed, two_rcc_speed, three_rcc_speed, one_rcc_pass, two_rcc_pass, three_rcc_pass, data_analysis, patrol_back_issue, remark, status, del_flag, create_by, create_time, update_by, update_time from zx_patrol_back
+    </sql>
+
+    <select id="selectZxPatrolBackList" parameterType="ZxPatrolBack" resultMap="ZxPatrolBackResult">
+        <include refid="selectZxPatrolBackVo"/>
+        <where>
+            <if test="deptId != null and deptId != 0">
+                AND (dept_id = #{deptId} OR dept_id IN ( SELECT t.dept_id FROM sys_dept t WHERE instr(','||ancestors||',',',${deptId},') <![CDATA[ >]]>0 ))
+            </if>
+            <if test="parentId != null "> and parent_id = #{parentId}</if>
+            <if test="patrolId != null "> and patrol_id = #{patrolId}</if>
+
+            <if test="patrolFrontName != null  and patrolFrontName != ''"> and patrol_front_name = #{patrolFrontName}</if>
+
+            <if test="pileNo != null  and pileNo != ''"> and pile_no = #{pileNo}</if>
+            <if test="distance != null  and distance != ''"> and distance = #{distance}</if>
+            <if test="constructionStructure != null  and constructionStructure != ''"> and construction_structure = #{constructionStructure}</if>
+            <if test="setWithType != null  and setWithType != ''"> and set_with_type = #{setWithType}</if>
+            <if test="isCover != null  and isCover != ''"> and is_cover = #{isCover}</if>
+            <if test="coverDetails != null  and coverDetails != ''"> and cover_details = #{coverDetails}</if>
+            <if test="isTransportTemperature != null  and isTransportTemperature != ''"> and is_transport_temperature = #{isTransportTemperature}</if>
+            <if test="transportTemperatureDetails != null  and transportTemperatureDetails != ''"> and transport_temperature_details = #{transportTemperatureDetails}</if>
+            <if test="pavingWay != null  and pavingWay != ''"> and paving_way = #{pavingWay}</if>
+            <if test="balancedWay != null  and balancedWay != ''"> and balanced_way = #{balancedWay}</if>
+            <if test="isSpacing != null  and isSpacing != ''"> and is_spacing = #{isSpacing}</if>
+            <if test="spacingDetails != null  and spacingDetails != ''"> and spacing_details = #{spacingDetails}</if>
+            <if test="pavingTemperature != null  and pavingTemperature != ''"> and paving_temperature = #{pavingTemperature}</if>
+            <if test="isPavingSituation != null  and isPavingSituation != ''"> and is_paving_situation = #{isPavingSituation}</if>
+            <if test="pavingDetails != null  and pavingDetails != ''"> and paving_details = #{pavingDetails}</if>
+
+            <if test="isPavingResults != null  and isPavingResults != ''"> and is_paving_results = #{isPavingResults}</if>
+
+            <if test="pavingResultsDetails != null  and pavingResultsDetails != ''"> and paving_results_details = #{pavingResultsDetails}</if>
+
+            <if test="oneRccTemperature != null  and oneRccTemperature != ''"> and one_rcc_temperature = #{oneRccTemperature}</if>
+            <if test="twoRccTemperature != null  and twoRccTemperature != ''"> and two_rcc_temperature = #{twoRccTemperature}</if>
+            <if test="threeRccTemperature != null  and threeRccTemperature != ''"> and three_rcc_temperature = #{threeRccTemperature}</if>
+            <if test="oneRccSpeed != null  and oneRccSpeed != ''"> and one_rcc_speed = #{oneRccSpeed}</if>
+            <if test="twoRccSpeed != null  and twoRccSpeed != ''"> and two_rcc_speed = #{twoRccSpeed}</if>
+            <if test="threeRccSpeed != null  and threeRccSpeed != ''"> and three_rcc_speed = #{threeRccSpeed}</if>
+            <if test="oneRccPass != null  and oneRccPass != ''"> and one_rcc_pass = #{oneRccPass}</if>
+            <if test="twoRccPass != null  and twoRccPass != ''"> and two_rcc_pass = #{twoRccPass}</if>
+            <if test="threeRccPass != null  and threeRccPass != ''"> and three_rcc_pass = #{threeRccPass}</if>
+            <if test="dataAnalysis != null  and dataAnalysis != ''"> and data_analysis = #{dataAnalysis}</if>
+            <if test="patrolBackIssue != null  and patrolBackIssue != ''"> and patrol_back_issue = #{patrolBackIssue}</if>
+            <if test="remark != null  and remark != ''"> and remark = #{remark}</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+            <if test="delFlag != null  and delFlag != ''"> and del_flag = #{delFlag}</if>
+            <if test="createBy != null  and createBy != ''"> and create_by like  '%' || #{createBy} || '%'</if>
+            <if test="params.beginCreateTime != null and params.beginCreateTime != '' and params.endCreateTime != null and params.endCreateTime != ''"> and create_time between #{params.beginCreateTime} and #{params.endCreateTime}</if>
+            <if test="updateBy != null  and updateBy != ''"> and update_by = #{updateBy}</if>
+            <if test="updateTime != null "> and update_time = #{updateTime}</if>
+        </where>
+        order by create_time desc
+    </select>
+
+    <select id="selectZxPatrolBackById" parameterType="Long" resultMap="ZxPatrolBackResult">
+        <include refid="selectZxPatrolBackVo"/>
+        where patrol_back_id = #{patrolBackId}
+    </select>
+
+    <!-- 根据巡查管理ID 查询一组 前场巡查 信息 -->
+    <select id="findByPatrolId" parameterType="Long" resultMap="ZxPatrolBackResult">
+        <include refid="selectZxPatrolBackVo"/>
+        where patrol_id = #{patrolId} order by patrol_back_id desc
+    </select>
+
+    <insert id="insertZxPatrolBack" parameterType="ZxPatrolBack" useGeneratedKeys="true" keyProperty="patrolBackId">
+        insert into zx_patrol_back
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="deptId != null ">dept_id,</if>
+            <if test="parentId != null ">parent_id,</if>
+            <if test="patrolId != null ">patrol_id,</if>
+            <if test="patrolFrontName != null  and patrolFrontName != ''">patrol_front_name,</if>
+            <if test="pileNo != null  and pileNo != ''">pile_no,</if>
+            <if test="distance != null  and distance != ''">distance,</if>
+            <if test="constructionStructure != null  and constructionStructure != ''">construction_structure,</if>
+            <if test="setWithType != null  and setWithType != ''">set_with_type,</if>
+            <if test="isCover != null  and isCover != ''">is_cover,</if>
+            <if test="coverDetails != null  and coverDetails != ''">cover_details,</if>
+            <if test="isTransportTemperature != null  and isTransportTemperature != ''">is_transport_temperature,</if>
+            <if test="transportTemperatureDetails != null  and transportTemperatureDetails != ''">transport_temperature_details,</if>
+            <if test="pavingWay != null  and pavingWay != ''">paving_way,</if>
+            <if test="balancedWay != null  and balancedWay != ''">balanced_way,</if>
+            <if test="isSpacing != null  and isSpacing != ''">is_spacing,</if>
+            <if test="spacingDetails != null  and spacingDetails != ''">spacing_details,</if>
+            <if test="pavingTemperature != null  and pavingTemperature != ''">paving_temperature,</if>
+            <if test="isPavingSituation != null  and isPavingSituation != ''">is_paving_situation,</if>
+            <if test="pavingDetails != null  and pavingDetails != ''">paving_details,</if>
+            <if test="isPavingResults != null  and isPavingResults != ''">is_paving_results,</if>
+
+            <if test="pavingResultsDetails != null  and pavingResultsDetails != ''">paving_results_details,</if>
+
+            <if test="oneRccTemperature != null  and oneRccTemperature != ''">one_rcc_temperature,</if>
+            <if test="twoRccTemperature != null  and twoRccTemperature != ''">two_rcc_temperature,</if>
+            <if test="threeRccTemperature != null  and threeRccTemperature != ''">three_rcc_temperature,</if>
+            <if test="oneRccSpeed != null  and oneRccSpeed != ''">one_rcc_speed,</if>
+            <if test="twoRccSpeed != null  and twoRccSpeed != ''">two_rcc_speed,</if>
+            <if test="threeRccSpeed != null  and threeRccSpeed != ''">three_rcc_speed,</if>
+            <if test="oneRccPass != null  and oneRccPass != ''">one_rcc_pass,</if>
+            <if test="twoRccPass != null  and twoRccPass != ''">two_rcc_pass,</if>
+            <if test="threeRccPass != null  and threeRccPass != ''">three_rcc_pass,</if>
+            <if test="dataAnalysis != null  and dataAnalysis != ''">data_analysis,</if>
+            <if test="patrolBackIssue != null  and patrolBackIssue != ''">patrol_back_issue,</if>
+            <if test="remark != null  and remark != ''">remark,</if>
+            <if test="status != null  and status != ''">status,</if>
+            <if test="delFlag != null  and delFlag != ''">del_flag,</if>
+            <if test="createBy != null  and createBy != ''">create_by,</if>
+            <if test="createTime != null ">create_time,</if>
+            <if test="updateBy != null  and updateBy != ''">update_by,</if>
+            <if test="updateTime != null ">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="deptId != null ">#{deptId},</if>
+            <if test="parentId != null ">#{parentId},</if>
+            <if test="patrolId != null ">#{patrolId},</if>
+            <if test="patrolFrontName != null  and patrolFrontName != ''"> #{patrolFrontName},</if>
+            <if test="pileNo != null  and pileNo != ''">#{pileNo},</if>
+            <if test="distance != null  and distance != ''">#{distance},</if>
+            <if test="constructionStructure != null  and constructionStructure != ''">#{constructionStructure},</if>
+            <if test="setWithType != null  and setWithType != ''">#{setWithType},</if>
+            <if test="isCover != null  and isCover != ''">#{isCover},</if>
+            <if test="coverDetails != null  and coverDetails != ''">#{coverDetails},</if>
+            <if test="isTransportTemperature != null  and isTransportTemperature != ''">#{isTransportTemperature},</if>
+            <if test="transportTemperatureDetails != null  and transportTemperatureDetails != ''">#{transportTemperatureDetails},</if>
+            <if test="pavingWay != null  and pavingWay != ''">#{pavingWay},</if>
+            <if test="balancedWay != null  and balancedWay != ''">#{balancedWay},</if>
+            <if test="isSpacing != null  and isSpacing != ''">#{isSpacing},</if>
+            <if test="spacingDetails != null  and spacingDetails != ''">#{spacingDetails},</if>
+            <if test="pavingTemperature != null  and pavingTemperature != ''">#{pavingTemperature},</if>
+            <if test="isPavingSituation != null  and isPavingSituation != ''">#{isPavingSituation},</if>
+            <if test="pavingDetails != null  and pavingDetails != ''">#{pavingDetails},</if>
+            <if test="isPavingResults != null  and isPavingResults != ''">#{isPavingResults},</if>
+            <if test="pavingResultsDetails != null  and pavingResultsDetails != ''">#{pavingResultsDetails},</if>
+            <if test="oneRccTemperature != null  and oneRccTemperature != ''">#{oneRccTemperature},</if>
+            <if test="twoRccTemperature != null  and twoRccTemperature != ''">#{twoRccTemperature},</if>
+            <if test="threeRccTemperature != null  and threeRccTemperature != ''">#{threeRccTemperature},</if>
+            <if test="oneRccSpeed != null  and oneRccSpeed != ''">#{oneRccSpeed},</if>
+            <if test="twoRccSpeed != null  and twoRccSpeed != ''">#{twoRccSpeed},</if>
+            <if test="threeRccSpeed != null  and threeRccSpeed != ''">#{threeRccSpeed},</if>
+            <if test="oneRccPass != null  and oneRccPass != ''">#{oneRccPass},</if>
+            <if test="twoRccPass != null  and twoRccPass != ''">#{twoRccPass},</if>
+            <if test="threeRccPass != null  and threeRccPass != ''">#{threeRccPass},</if>
+            <if test="dataAnalysis != null  and dataAnalysis != ''">#{dataAnalysis},</if>
+            <if test="patrolBackIssue != null  and patrolBackIssue != ''">#{patrolBackIssue},</if>
+            <if test="remark != null  and remark != ''">#{remark},</if>
+            <if test="status != null  and status != ''">#{status},</if>
+            <if test="delFlag != null  and delFlag != ''">#{delFlag},</if>
+            <if test="createBy != null  and createBy != ''">#{createBy},</if>
+            <if test="createTime != null ">#{createTime},</if>
+            <if test="updateBy != null  and updateBy != ''">#{updateBy},</if>
+            <if test="updateTime != null ">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateZxPatrolBack" parameterType="ZxPatrolBack">
+        update zx_patrol_back
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="deptId != null ">dept_id = #{deptId},</if>
+            <if test="parentId != null ">parent_id = #{parentId},</if>
+            <if test="patrolId != null ">patrol_id = #{patrolId},</if>
+
+            <if test="patrolFrontName != null  and patrolFrontName != ''">  patrol_front_name = #{patrolFrontName},</if>
+
+            <if test="pileNo != null  and pileNo != ''">pile_no = #{pileNo},</if>
+            <if test="distance != null  and distance != ''">distance = #{distance},</if>
+            <if test="constructionStructure != null  and constructionStructure != ''">construction_structure = #{constructionStructure},</if>
+            <if test="setWithType != null  and setWithType != ''">set_with_type = #{setWithType},</if>
+            <if test="isCover != null  and isCover != ''">is_cover = #{isCover},</if>
+            <if test="coverDetails != null  and coverDetails != ''">cover_details = #{coverDetails},</if>
+            <if test="isTransportTemperature != null  and isTransportTemperature != ''">is_transport_temperature = #{isTransportTemperature},</if>
+            <if test="transportTemperatureDetails != null  and transportTemperatureDetails != ''">transport_temperature_details = #{transportTemperatureDetails},</if>
+            <if test="pavingWay != null  and pavingWay != ''">paving_way = #{pavingWay},</if>
+            <if test="balancedWay != null  and balancedWay != ''">balanced_way = #{balancedWay},</if>
+            <if test="isSpacing != null  and isSpacing != ''">is_spacing = #{isSpacing},</if>
+            <if test="spacingDetails != null  and spacingDetails != ''">spacing_details = #{spacingDetails},</if>
+            <if test="pavingTemperature != null  and pavingTemperature != ''">paving_temperature = #{pavingTemperature},</if>
+            <if test="isPavingSituation != null  and isPavingSituation != ''">is_paving_situation = #{isPavingSituation},</if>
+            <if test="pavingDetails != null  and pavingDetails != ''">paving_details = #{pavingDetails},</if>
+
+            <if test="isPavingResults != null  and isPavingResults != ''">is_paving_results = #{isPavingResults},</if>
+
+            <if test="pavingResultsDetails != null  and pavingResultsDetails != ''">  paving_results_details = #{pavingResultsDetails},</if>
+
+
+            <if test="oneRccTemperature != null  and oneRccTemperature != ''">one_rcc_temperature = #{oneRccTemperature},</if>
+            <if test="twoRccTemperature != null  and twoRccTemperature != ''">two_rcc_temperature = #{twoRccTemperature},</if>
+            <if test="threeRccTemperature != null  and threeRccTemperature != ''">three_rcc_temperature = #{threeRccTemperature},</if>
+            <if test="oneRccSpeed != null  and oneRccSpeed != ''">one_rcc_speed = #{oneRccSpeed},</if>
+            <if test="twoRccSpeed != null  and twoRccSpeed != ''">two_rcc_speed = #{twoRccSpeed},</if>
+            <if test="threeRccSpeed != null  and threeRccSpeed != ''">three_rcc_speed = #{threeRccSpeed},</if>
+            <if test="oneRccPass != null  and oneRccPass != ''">one_rcc_pass = #{oneRccPass},</if>
+            <if test="twoRccPass != null  and twoRccPass != ''">two_rcc_pass = #{twoRccPass},</if>
+            <if test="threeRccPass != null  and threeRccPass != ''">three_rcc_pass = #{threeRccPass},</if>
+            <if test="dataAnalysis != null  and dataAnalysis != ''">data_analysis = #{dataAnalysis},</if>
+            <if test="patrolBackIssue != null  and patrolBackIssue != ''">patrol_back_issue = #{patrolBackIssue},</if>
+            <if test="remark != null  and remark != ''">remark = #{remark},</if>
+            <if test="status != null  and status != ''">status = #{status},</if>
+            <if test="delFlag != null  and delFlag != ''">del_flag = #{delFlag},</if>
+            <if test="createBy != null  and createBy != ''">create_by = #{createBy},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+            <if test="updateBy != null  and updateBy != ''">update_by = #{updateBy},</if>
+            <if test="updateTime != null ">update_time = #{updateTime},</if>
+        </trim>
+        where patrol_back_id = #{patrolBackId}
+    </update>
+
+    <delete id="deleteZxPatrolBackById" parameterType="Long">
+        delete from zx_patrol_back where patrol_back_id = #{patrolBackId}
+    </delete>
+
+    <delete id="deleteZxPatrolBackByIds" parameterType="String">
+        delete from zx_patrol_back where patrol_back_id in
+        <foreach item="patrolBackId" collection="array" open="(" separator="," close=")">
+            #{patrolBackId}
+        </foreach>
+    </delete>
+
+</mapper>

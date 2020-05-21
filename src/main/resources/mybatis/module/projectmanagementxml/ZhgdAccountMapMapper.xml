@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.djzhgd.module.projectmanagement.mapper.ZhgdAccountMapMapper" >
+  <resultMap id="BaseResultMap" type="com.djzhgd.module.projectmanagement.domain.ZhgdAccountMap" >
+    <result column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="DEPT_ID" property="deptId" jdbcType="DECIMAL" />
+    <result column="TENANT_ID" property="tenantId" jdbcType="DECIMAL" />
+    <result column="USER_ID" property="userId" jdbcType="VARCHAR" />
+    <result column="OTHER_SYSTEM" property="otherSystem" jdbcType="VARCHAR" />
+    <result column="OTHER_SYS_NAME" property="otherSysName" jdbcType="VARCHAR" />
+    <result column="OTHER_LOGIN_ID" property="otherLoginId" jdbcType="VARCHAR" />
+    <result column="OTHER_PWD" property="otherPwd" jdbcType="VARCHAR" />
+    <result column="USERNAME" property="username" jdbcType="VARCHAR" />
+    <result column="OTHER_USERNAME" property="otherUsername" jdbcType="VARCHAR" />
+    <result column="LOGIN_ID" property="loginId" jdbcType="VARCHAR" />
+    <result column="DISABLED" property="disabled" jdbcType="DECIMAL" />
+    <result column="CREATE_USERID" property="createUserid" jdbcType="VARCHAR" />
+    <result column="CREATE_USERNAME" property="createUsername" jdbcType="VARCHAR" />
+    <result column="CREATE_IP" property="createIp" jdbcType="VARCHAR" />
+    <result column="CREATE_DATETIME" property="createDatetime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_USERID" property="updateUserid" jdbcType="VARCHAR" />
+    <result column="UPDATE_USERNAME" property="updateUsername" jdbcType="VARCHAR" />
+    <result column="UPDATE_IP" property="updateIp" jdbcType="VARCHAR" />
+    <result column="UPDATE_DATETIME" property="updateDatetime" jdbcType="TIMESTAMP" />
+  </resultMap>
+
+  <select id="getOtherLogin" parameterType="String" resultMap="BaseResultMap">
+		select * from ZHGD_ACCOUNT_MAP where DEPT_ID = #{deptId} and OTHER_SYSTEM = #{otherSystem} and LOGIN_ID = #{userId}
+	</select>
+</mapper>

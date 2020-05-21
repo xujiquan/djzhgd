@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.djzhgd.project.system.mapper.ZxSyLaboratoryInfoMapper">
+
+    <resultMap type="ZxSyLaboratoryInfo" id="ZxSyLaboratoryInfoResult">
+        <result property="laboratoryId"    column="laboratory_id"    />
+        <result property="deptId"    column="dept_id"    />
+        <result property="parentId"    column="parent_id"    />
+        <result property="laboratoryType"    column="laboratory_type"    />
+        <result property="laboratoryName"    column="laboratory_name"    />
+        <result property="area"    column="area"    />
+        <result property="peopleNum"    column="people_num"    />
+        <result property="laboratoryAddress"    column="laboratory_address"    />
+        <result property="laboratoryScope"    column="laboratory_scope"    />
+        <result property="level"    column="level"    />
+        <result property="isMother"    column="is_mother"    />
+        <result property="buildingType"    column="building_type"    />
+        <result property="isQualification"    column="is_qualification"    />
+        <result property="isPeopleNum"    column="is_people_num"    />
+        <result property="isTestMethod"    column="is_test_method"    />
+        <result property="isPeopleSafe"    column="is_people_safe"    />
+        <result property="isCredit"    column="is_credit"    />
+        <result property="isAttendance"    column="is_attendance"    />
+        <result property="isTraining"    column="is_training"    />
+        <result property="isArchives"    column="is_archives"    />
+        <result property="isRules"    column="is_rules"    />
+        <result property="isJobs"    column="is_jobs"    />
+        <result property="isEquipmentRules"    column="is_equipment_rules"    />
+        <result property="isSampleRules"    column="is_sample_rules"    />
+        <result property="isReportRules"    column="is_report_rules"    />
+        <result property="isInspectionRules"    column="is_inspection_rules"    />
+        <result property="isUnqualifiedRules"    column="is_unqualified_rules"    />
+        <result property="isSafe"    column="is_safe"    />
+        <result property="remark"    column="remark"    />
+        <result property="status"    column="status"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectZxSyLaboratoryInfoVo">
+        select laboratory_id, dept_id, parent_id, laboratory_type, laboratory_name, area, people_num, laboratory_scope,laboratory_address, level, is_mother, building_type, is_qualification, is_people_num, is_test_method, is_people_safe, is_credit, is_attendance, is_training, is_archives, is_rules, is_jobs, is_equipment_rules, is_sample_rules, is_report_rules, is_inspection_rules, is_unqualified_rules, is_safe, remark, status, del_flag, create_by, create_time, update_by, update_time from zx_sy_laboratory_info
+    </sql>
+
+    <select id="selectZxSyLaboratoryInfoList" parameterType="ZxSyLaboratoryInfo" resultMap="ZxSyLaboratoryInfoResult">
+        <include refid="selectZxSyLaboratoryInfoVo"/>
+        <where>
+<!--            <if test="deptId != null "> and dept_id = #{deptId}</if>-->
+            <if test="deptId != null and deptId != 0">
+                AND (dept_id = #{deptId} OR dept_id IN ( SELECT t.dept_id FROM sys_dept t WHERE instr(','||ancestors||',',',${deptId},') <![CDATA[ >]]>0 ))
+            </if>
+            <if test="parentId != null "> and parent_id = #{parentId}</if>
+            <if test="laboratoryType != null  and laboratoryType != ''"> and laboratory_type = #{laboratoryType}</if>
+            <if test="laboratoryName != null  and laboratoryName != ''"> and laboratory_name like  '%' || #{laboratoryName} || '%'</if>
+            <if test="area != null  and area != ''"> and area = #{area}</if>
+            <if test="peopleNum != null  and peopleNum != ''"> and people_num = #{peopleNum}</if>
+            <if test="laboratoryScope != null  and laboratoryScope != ''">and laboratory_scope = #{laboratoryScope}</if>
+            <if test="laboratoryAddress != null  and laboratoryAddress != ''"> and laboratory_address like  '%' || #{laboratoryAddress} || '%'</if>
+            <if test="level != null  and level != ''"> and level = #{level}</if>
+            <if test="isMother != null  and isMother != ''"> and is_mother = #{isMother}</if>
+            <if test="buildingType != null  and buildingType != ''"> and building_type = #{buildingType}</if>
+            <if test="isQualification != null  and isQualification != ''"> and is_qualification = #{isQualification}</if>
+            <if test="isPeopleNum != null  and isPeopleNum != ''"> and is_people_num = #{isPeopleNum}</if>
+            <if test="isTestMethod != null  and isTestMethod != ''"> and is_test_method = #{isTestMethod}</if>
+            <if test="isPeopleSafe != null  and isPeopleSafe != ''"> and is_people_safe = #{isPeopleSafe}</if>
+            <if test="isCredit != null  and isCredit != ''"> and is_credit = #{isCredit}</if>
+            <if test="isAttendance != null  and isAttendance != ''"> and is_attendance = #{isAttendance}</if>
+            <if test="isTraining != null  and isTraining != ''"> and is_training = #{isTraining}</if>
+            <if test="isArchives != null  and isArchives != ''"> and is_archives = #{isArchives}</if>
+            <if test="isRules != null  and isRules != ''"> and is_rules = #{isRules}</if>
+            <if test="isJobs != null  and isJobs != ''"> and is_jobs = #{isJobs}</if>
+            <if test="isEquipmentRules != null  and isEquipmentRules != ''"> and is_equipment_rules = #{isEquipmentRules}</if>
+            <if test="isSampleRules != null  and isSampleRules != ''"> and is_sample_rules = #{isSampleRules}</if>
+            <if test="isReportRules != null  and isReportRules != ''"> and is_report_rules = #{isReportRules}</if>
+            <if test="isInspectionRules != null  and isInspectionRules != ''"> and is_inspection_rules = #{isInspectionRules}</if>
+            <if test="isUnqualifiedRules != null  and isUnqualifiedRules != ''"> and is_unqualified_rules = #{isUnqualifiedRules}</if>
+            <if test="isSafe != null  and isSafe != ''"> and is_safe = #{isSafe}</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+        </where>
+        order by create_time desc
+    </select>
+
+    <select id="selectZxSyLaboratoryInfoById" parameterType="Long" resultMap="ZxSyLaboratoryInfoResult">
+        <include refid="selectZxSyLaboratoryInfoVo"/>
+        where laboratory_id = #{laboratoryId}
+    </select>
+
+    <insert id="insertZxSyLaboratoryInfo" parameterType="ZxSyLaboratoryInfo" useGeneratedKeys="true" keyProperty="laboratoryId">
+        insert into zx_sy_laboratory_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="deptId != null ">dept_id,</if>
+            <if test="parentId != null ">parent_id,</if>
+            <if test="laboratoryType != null  and laboratoryType != ''">laboratory_type,</if>
+            <if test="laboratoryName != null  and laboratoryName != ''">laboratory_name,</if>
+            <if test="area != null  and area != ''">area,</if>
+            <if test="peopleNum != null  and peopleNum != ''">people_num,</if>
+
+            <if test="laboratoryScope != null  and laboratoryScope != ''">laboratory_scope,</if>
+            <if test="laboratoryAddress != null  and laboratoryAddress != ''">laboratory_address,</if>
+            <if test="level != null  and level != ''">level,</if>
+            <if test="isMother != null  and isMother != ''">is_mother,</if>
+            <if test="buildingType != null  and buildingType != ''">building_type,</if>
+            <if test="isQualification != null  and isQualification != ''">is_qualification,</if>
+            <if test="isPeopleNum != null  and isPeopleNum != ''">is_people_num,</if>
+            <if test="isTestMethod != null  and isTestMethod != ''">is_test_method,</if>
+            <if test="isPeopleSafe != null  and isPeopleSafe != ''">is_people_safe,</if>
+            <if test="isCredit != null  and isCredit != ''">is_credit,</if>
+            <if test="isAttendance != null  and isAttendance != ''">is_attendance,</if>
+            <if test="isTraining != null  and isTraining != ''">is_training,</if>
+            <if test="isArchives != null  and isArchives != ''">is_archives,</if>
+            <if test="isRules != null  and isRules != ''">is_rules,</if>
+            <if test="isJobs != null  and isJobs != ''">is_jobs,</if>
+            <if test="isEquipmentRules != null  and isEquipmentRules != ''">is_equipment_rules,</if>
+            <if test="isSampleRules != null  and isSampleRules != ''">is_sample_rules,</if>
+            <if test="isReportRules != null  and isReportRules != ''">is_report_rules,</if>
+            <if test="isInspectionRules != null  and isInspectionRules != ''">is_inspection_rules,</if>
+            <if test="isUnqualifiedRules != null  and isUnqualifiedRules != ''">is_unqualified_rules,</if>
+            <if test="isSafe != null  and isSafe != ''">is_safe,</if>
+            <if test="remark != null  and remark != ''">remark,</if>
+            <if test="status != null  and status != ''">status,</if>
+            <if test="delFlag != null  and delFlag != ''">del_flag,</if>
+            <if test="createBy != null  and createBy != ''">create_by,</if>
+            <if test="createTime != null ">create_time,</if>
+            <if test="updateBy != null  and updateBy != ''">update_by,</if>
+            <if test="updateTime != null ">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="deptId != null ">#{deptId},</if>
+            <if test="parentId != null ">#{parentId},</if>
+            <if test="laboratoryType != null  and laboratoryType != ''">#{laboratoryType},</if>
+            <if test="laboratoryName != null  and laboratoryName != ''">#{laboratoryName},</if>
+            <if test="area != null  and area != ''">#{area},</if>
+            <if test="peopleNum != null  and peopleNum != ''">#{peopleNum},</if>
+
+            <if test="laboratoryScope != null  and laboratoryScope != ''">#{laboratoryScope},</if>
+            <if test="laboratoryAddress != null  and laboratoryAddress != ''">#{laboratoryAddress},</if>
+            <if test="level != null  and level != ''">#{level},</if>
+            <if test="isMother != null  and isMother != ''">#{isMother},</if>
+            <if test="buildingType != null  and buildingType != ''">#{buildingType},</if>
+            <if test="isQualification != null  and isQualification != ''">#{isQualification},</if>
+            <if test="isPeopleNum != null  and isPeopleNum != ''">#{isPeopleNum},</if>
+            <if test="isTestMethod != null  and isTestMethod != ''">#{isTestMethod},</if>
+            <if test="isPeopleSafe != null  and isPeopleSafe != ''">#{isPeopleSafe},</if>
+            <if test="isCredit != null  and isCredit != ''">#{isCredit},</if>
+            <if test="isAttendance != null  and isAttendance != ''">#{isAttendance},</if>
+            <if test="isTraining != null  and isTraining != ''">#{isTraining},</if>
+            <if test="isArchives != null  and isArchives != ''">#{isArchives},</if>
+            <if test="isRules != null  and isRules != ''">#{isRules},</if>
+            <if test="isJobs != null  and isJobs != ''">#{isJobs},</if>
+            <if test="isEquipmentRules != null  and isEquipmentRules != ''">#{isEquipmentRules},</if>
+            <if test="isSampleRules != null  and isSampleRules != ''">#{isSampleRules},</if>
+            <if test="isReportRules != null  and isReportRules != ''">#{isReportRules},</if>
+            <if test="isInspectionRules != null  and isInspectionRules != ''">#{isInspectionRules},</if>
+            <if test="isUnqualifiedRules != null  and isUnqualifiedRules != ''">#{isUnqualifiedRules},</if>
+            <if test="isSafe != null  and isSafe != ''">#{isSafe},</if>
+            <if test="remark != null  and remark != ''">#{remark},</if>
+            <if test="status != null  and status != ''">#{status},</if>
+            <if test="delFlag != null  and delFlag != ''">#{delFlag},</if>
+            <if test="createBy != null  and createBy != ''">#{createBy},</if>
+            <if test="createTime != null ">#{createTime},</if>
+            <if test="updateBy != null  and updateBy != ''">#{updateBy},</if>
+            <if test="updateTime != null ">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateZxSyLaboratoryInfo" parameterType="ZxSyLaboratoryInfo">
+        update zx_sy_laboratory_info
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="deptId != null ">dept_id = #{deptId},</if>
+            <if test="parentId != null ">parent_id = #{parentId},</if>
+            <if test="laboratoryType != null  and laboratoryType != ''">laboratory_type = #{laboratoryType},</if>
+            <if test="laboratoryName != null  and laboratoryName != ''">laboratory_name = #{laboratoryName},</if>
+            <if test="area != null  and area != ''">area = #{area},</if>
+            <if test="peopleNum != null  and peopleNum != ''">people_num = #{peopleNum},</if>
+
+            <if test="laboratoryScope != null  and laboratoryScope != ''">laboratory_scope = #{laboratoryScope},</if>
+            <if test="laboratoryAddress != null  and laboratoryAddress != ''">laboratory_address = #{laboratoryAddress},</if>
+            <if test="level != null  and level != ''">level = #{level},</if>
+            <if test="isMother != null  and isMother != ''">is_mother = #{isMother},</if>
+            <if test="buildingType != null  and buildingType != ''">building_type = #{buildingType},</if>
+            <if test="isQualification != null  and isQualification != ''">is_qualification = #{isQualification},</if>
+            <if test="isPeopleNum != null  and isPeopleNum != ''">is_people_num = #{isPeopleNum},</if>
+            <if test="isTestMethod != null  and isTestMethod != ''">is_test_method = #{isTestMethod},</if>
+            <if test="isPeopleSafe != null  and isPeopleSafe != ''">is_people_safe = #{isPeopleSafe},</if>
+            <if test="isCredit != null  and isCredit != ''">is_credit = #{isCredit},</if>
+            <if test="isAttendance != null  and isAttendance != ''">is_attendance = #{isAttendance},</if>
+            <if test="isTraining != null  and isTraining != ''">is_training = #{isTraining},</if>
+            <if test="isArchives != null  and isArchives != ''">is_archives = #{isArchives},</if>
+            <if test="isRules != null  and isRules != ''">is_rules = #{isRules},</if>
+            <if test="isJobs != null  and isJobs != ''">is_jobs = #{isJobs},</if>
+            <if test="isEquipmentRules != null  and isEquipmentRules != ''">is_equipment_rules = #{isEquipmentRules},</if>
+            <if test="isSampleRules != null  and isSampleRules != ''">is_sample_rules = #{isSampleRules},</if>
+            <if test="isReportRules != null  and isReportRules != ''">is_report_rules = #{isReportRules},</if>
+            <if test="isInspectionRules != null  and isInspectionRules != ''">is_inspection_rules = #{isInspectionRules},</if>
+            <if test="isUnqualifiedRules != null  and isUnqualifiedRules != ''">is_unqualified_rules = #{isUnqualifiedRules},</if>
+            <if test="isSafe != null  and isSafe != ''">is_safe = #{isSafe},</if>
+            <if test="remark != null  and remark != ''">remark = #{remark},</if>
+            <if test="status != null  and status != ''">status = #{status},</if>
+            <if test="delFlag != null  and delFlag != ''">del_flag = #{delFlag},</if>
+            <if test="createBy != null  and createBy != ''">create_by = #{createBy},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+            <if test="updateBy != null  and updateBy != ''">update_by = #{updateBy},</if>
+            <if test="updateTime != null ">update_time = #{updateTime},</if>
+        </trim>
+        where laboratory_id = #{laboratoryId}
+    </update>
+
+    <delete id="deleteZxSyLaboratoryInfoById" parameterType="Long">
+        delete from zx_sy_laboratory_info where laboratory_id = #{laboratoryId}
+    </delete>
+
+    <delete id="deleteZxSyLaboratoryInfoByIds" parameterType="String">
+        delete from zx_sy_laboratory_info where laboratory_id in
+        <foreach item="laboratoryId" collection="array" open="(" separator="," close=")">
+            #{laboratoryId}
+        </foreach>
+    </delete>
+
+</mapper>

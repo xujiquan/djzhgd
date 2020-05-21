@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.djzhgd.module.material.mapper.ZhgdMaterialInstockMapper">
+
+    <!-- 可根据自己的需求，是否要使用 -->
+    <resultMap id="zhgdMaterialInstock" type="com.djzhgd.module.material.domain.ZhgdMaterialInstock">
+        <result property="id" column="id"/>
+        <result property="disabled" column="disabled" />
+        <result property="createUserid" column="create_userid" />
+        <result property="createUsername" column="create_username" />
+        <result property="createDatetime" column="create_datetime" />
+        <result property="createIp" column="create_ip" />
+        <result property="updateUserid" column="update_userid" />
+        <result property="updateUsername" column="update_username" />
+        <result property="updateDatetime" column="update_datetime" />
+        <result property="updateIp" column="update_ip" />
+        <result property="batch" column="batch" />
+        <result property="model" column="model" />
+        <result property="plate" column="plate" />
+        <result property="number" column="number" />
+        <result property="materialName" column="material_name" />
+        <result property="materialType" column="material_type" />
+        <result property="unit" column="unit" />
+        <result property="bidsName" column="bids_name" />
+        <result property="supplier" column="supplier" />
+        <result property="produceAddress" column="produce_address" />
+        <result property="carNumber" column="car_number" />
+        <result property="usedPart" column="used_part" />
+        <result property="instockTime" column="instock_time" />
+        <result property="instockUser" column="instock_user" />
+        <result property="checkUser" column="check_user" />
+        <result property="instockWord" column="instock_word" />
+        <result property="remark" column="remark" />
+        <result property="checkNum" column="check_num" />
+        <result property="taskNode" column="task_node" />
+        <result property="errorRemark" column="error_remark" />
+        <result property="state" column="state"></result>
+        <result property="tenantId" column="tenant_id"></result>
+		<result property="standard" column="standard" />
+		<result property="deptId" column="dept_id" />
+
+	</resultMap>
+
+    <!-- demo表所有的列 -->
+    <sql id="zhgdMaterialInstock_columns">
+        ID, DISABLED, CREATE_USERID, CREATE_USERNAME, CREATE_DATETIME, CREATE_IP,
+        UPDATE_USERID, UPDATE_USERNAME, UPDATE_DATETIME, UPDATE_IP, BATCH, MODEL,
+        PLATE, "NUMBER", MATERIAL_NAME, MATERIAL_TYPE, UNIT, BIDS_NAME, SUPPLIER, PRODUCE_ADDRESS, CAR_NUMBER, USED_PART,
+        INSTOCK_TIME, INSTOCK_USER, CHECK_USER, INSTOCK_WORD, REMARK, CHECK_NUM, TASK_NODE, ERROR_REMARK,STANDARD,STATE,TENANT_ID,DEPT_ID
+
+    </sql>
+
+    <!-- 查询所有记录 -->
+    <select id="queryInStockByBatchAndProId" resultMap="zhgdMaterialInstock">
+        SELECT
+        <include refid="zhgdMaterialInstock_columns" />
+
+		    FROM ZHGD_MATERIAL_INSTOCK where batch= #{batch}
+		    <if test="tenantId != null">
+				and tenant_id = #{tenantId}
+			</if>
+
+			<if test="deptId != null">
+				and dept_id = #{deptId}
+			</if>
+
+    </select>
+
+    <!-- 查询所有记录 -->
+    <select id="queryGroupByMaterialNameAndProId" resultType="com.djzhgd.module.material.domain.ZhgdMaterialInstock">
+		SELECT
+	        material_name AS materialName,unit AS unit,
+	     	cast(SUM(number) as decimal(18,3)) AS sumNumber,
+	     	material_type as materialType,
+	     	model,dept_id as deptId
+          FROM
+	      ZHGD_MATERIAL_INSTOCK
+
+	      where dept_id = #{deptId}
+          GROUP BY
+	      material_name,unit,material_type,model,dept_id
+	</select>
+
+
+    <!-- 新增记录 -->
+    <insert id="save" parameterType="com.djzhgd.module.material.domain.ZhgdMaterialInstock">
+
+	        INSERT INTO ZHGD_MATERIAL_INSTOCK (
+	        	DISABLED,
+	        	CREATE_USERID,
+	        	CREATE_USERNAME,
+	        	CREATE_DATETIME,
+	        	CREATE_IP,
+	        	UPDATE_USERID,
+	        	UPDATE_USERNAME,
+	        	UPDATE_DATETIME,
+	        	UPDATE_IP,
+	        	BATCH,
+	        	MODEL,
+	        	PLATE,
+	        	"NUMBER",
+	        	MATERIAL_NAME,
+	        	MATERIAL_TYPE,
+	        	UNIT,
+	        	BIDS_NAME,
+	        	SUPPLIER,
+	        	PRODUCE_ADDRESS,
+	        	CAR_NUMBER,
+	        	USED_PART,
+	        	INSTOCK_TIME,
+	        	INSTOCK_USER,
+	        	CHECK_USER,
+	        	INSTOCK_WORD,
+	        	REMARK,
+	        	CHECK_NUM,
+	        	TASK_NODE,
+	        	ERROR_REMARK,
+	        	STATE,
+	        	STANDARD,
+                TENANT_ID,
+                DEPT_ID
+	        ) VALUES (
+	        	0,
+	        	#{createUserid},
+	        	#{createUsername},
+	        	(select  sysdate from dual),
+	        	#{createIp},
+	        	#{updateUserid},
+	        	#{updateUsername},
+	        	#{updateDatetime},
+	        	#{updateIp},
+	        	#{batch},
+	        	#{model},
+	        	#{plate},
+	        	#{number},
+	        	#{materialName},
+	        	#{materialType},
+	        	#{unit},
+	        	#{bidsName},
+	        	#{supplier},
+	        	#{produceAddress},
+	        	#{carNumber},
+	        	#{usedPart},
+	        	#{instockTime},
+	        	#{instockUser},
+	        	#{checkUser},
+	        	#{instockWord},
+	        	#{remark},
+	        	#{checkNum},
+	        	#{taskNode},
+	        	#{errorRemark},
+	        	#{state},
+	        	#{standard},
+	        	#{tenantId},
+	        	#{deptId}
+	        )
+    </insert>
+
+	<select id="getById" resultMap="zhgdMaterialInstock" parameterType="integer">
+
+		SELECT
+		<include refid="zhgdMaterialInstock_columns" />
+		<![CDATA[
+	        FROM ZHGD_MATERIAL_INSTOCK
+	        WHERE
+		        id = #{id}
+	    ]]>
+	</select>
+	
+	<update id="update" parameterType="com.djzhgd.module.material.domain.ZhgdMaterialInstock">
+		UPDATE ZHGD_MATERIAL_INSTOCK SET
+		        DISABLED = #{disabled},
+		        UPDATE_USERID = #{updateUserid},
+		        UPDATE_USERNAME = #{updateUsername},
+		        UPDATE_DATETIME = (select  sysdate from dual),
+		        UPDATE_IP = #{updateIp},
+		        BATCH = #{batch},
+		        MODEL = #{model},
+		        PLATE = #{plate},
+		        "NUMBER" = #{number},
+		        MATERIAL_NAME = #{materialName},
+		        MATERIAL_TYPE = #{materialType},
+		        UNIT = #{unit},
+		        BIDS_NAME = #{bidsName},
+		        SUPPLIER = #{supplier},
+		        PRODUCE_ADDRESS = #{produceAddress},
+		        CAR_NUMBER = #{carNumber},
+		        USED_PART = #{usedPart},
+		        INSTOCK_TIME = #{instockTime},
+		        INSTOCK_USER = #{instockUser},
+		        CHECK_USER = #{checkUser},
+		        INSTOCK_WORD = #{instockWord},
+		        REMARK = #{remark},
+		        CHECK_NUM = #{checkNum},
+		        TASK_NODE = #{taskNode},
+		        ERROR_REMARK = #{errorRemark},
+		        STANDARD = #{standard},
+		        STATE = #{state}
+	        WHERE
+		        id = #{id} and dept_id = #{deptId}
+
+	</update>
+
+
+	<!-- 查询所有记录 -->
+	<select id="queryGroupByMaterialName" resultType="com.djzhgd.module.material.domain.ZhgdMaterialInstock">
+		SELECT
+	        material_name AS materialName,unit AS unit,
+	     	cast(SUM(number) as decimal(18,3)) AS sumNumber,
+	     	material_type as materialType,
+	     	model,
+	     	dept_id
+          FROM
+	      ZHGD_MATERIAL_INSTOCK  where dept_id = #{deptId}
+          GROUP BY
+	      material_name,unit,material_type,model,dept_id
+	</select>
+
+	<select id="queryAllByDeptId" resultType="com.djzhgd.module.material.domain.ZhgdMaterialInstock">
+		<!-- 查询所有记录 -->
+	  SELECT
+		<include refid="zhgdMaterialInstock_columns" />
+
+		FROM ZHGD_MATERIAL_INSTOCK
+		where dept_id = #{deptId}
+
+	</select>
+</mapper>

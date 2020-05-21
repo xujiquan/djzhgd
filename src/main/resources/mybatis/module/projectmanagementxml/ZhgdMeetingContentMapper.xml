@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.djzhgd.module.projectmanagement.domain.ZhgdMeetingContent">
+	<resultMap id="BaseResultMap" type="com.djzhgd.module.projectmanagement.domain.ZhgdMeetingContent">
+		<result column="id" jdbcType="INTEGER"  />
+		<result property="deptId" column="dept_id" />
+		<result property="tenantId" column="tenant_id" />
+		<result property="initiator" column="initiator" />
+		<result property="meetingTitle" column="meeting_title" />
+		<result property="meetingTime" column="meeting_time" />
+		<result property="initiatorId" column="initiator_id" />
+		<result property="assignController" column="assign_controller" />
+		<result property="nodeNum" column="node_num" />
+		<result property="disabled" column="disabled" />
+		<result property="createUserid" column="create_userid" />
+		<result property="createUsername" column="create_username" />
+		<result property="createIp" column="create_ip" />
+		<result property="createDatetime" column="create_datetime" />
+		<result property="updateUserid" column="update_userid" />
+		<result property="updateUsername" column="update_username" />
+		<result property="updateIp" column="update_ip" />
+		<result property="updateDatetime" column="update_datetime" />
+	</resultMap>
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="zhgdMeetingContentcolumns">
+        id, dept_id, tenant_id, initiator, meeting_title, meeting_time, initiator_id, assign_controller, node_num, disabled, create_userid, create_username, create_ip, create_datetime, update_userid, update_username, update_ip, update_datetime
+	</sql>
+
+
+</mapper>

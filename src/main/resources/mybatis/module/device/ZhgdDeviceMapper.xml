@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.djzhgd.module.device.mapper.ZhgdDeviceMapper" >
+  <resultMap id="BaseResultMap" type="com.djzhgd.module.device.domain.ZhgdDevice" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="DEPT_ID" property="deptId" jdbcType="DECIMAL" />
+    <result column="TENANT_ID" property="tenantId" jdbcType="DECIMAL" />
+    <result column="DISABLED" property="disabled" jdbcType="DECIMAL" />
+    <result column="CREATE_USERID" property="createUserid" jdbcType="DECIMAL" />
+    <result column="CREATE_USERNAME" property="createUsername" jdbcType="VARCHAR" />
+    <result column="CREATE_IP" property="createIp" jdbcType="VARCHAR" />
+    <result column="CREATE_DATETIME" property="createDatetime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_USERID" property="updateUserid" jdbcType="DECIMAL" />
+    <result column="UPDATE_USERNAME" property="updateUsername" jdbcType="VARCHAR" />
+    <result column="UPDATE_IP" property="updateIp" jdbcType="VARCHAR" />
+    <result column="UPDATE_DATETIME" property="updateDatetime" jdbcType="TIMESTAMP" />
+    <result column="ORG_ID" property="orgId" jdbcType="VARCHAR" />
+    <result column="DEVICE_TYPE_CODE" property="deviceTypeCode" jdbcType="VARCHAR" />
+    <result column="USE_LOCATION_CODE" property="useLocationCode" jdbcType="VARCHAR" />
+    <result column="NUMBER" property="number" jdbcType="VARCHAR" />
+    <result column="MODEL" property="model" jdbcType="VARCHAR" />
+    <result column="CATGEGROY" property="catgegroy" jdbcType="VARCHAR" />
+    <result column="IS_RENT" property="isRent" jdbcType="VARCHAR" />
+    <result column="IN_TIME" property="inTime" jdbcType="VARCHAR" />
+    <result column="OUT_TIME" property="outTime" jdbcType="VARCHAR" />
+    <result column="IN_OUT_STATUS" property="inOutStatus" jdbcType="VARCHAR" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="ACCEPT_STATUS" property="acceptStatus" jdbcType="VARCHAR" />
+    <result column="ATTACHMENT_ID" property="attachmentId" jdbcType="VARCHAR" />
+    <result column="IMAGE_ID" property="imageId" jdbcType="VARCHAR" />
+    <result column="LICENSE_PLATE" property="licensePlate" jdbcType="VARCHAR" />
+    <result column="ZHGD_DEPT_ID" property="zhgdDeptId" jdbcType="DECIMAL" />
+    <result column="ZHGD_DEPT_NAME" property="zhgdDeptName" jdbcType="VARCHAR" />
+    <result column="ZHGD_USER_ID" property="zhgdUserId" jdbcType="DECIMAL" />
+    <result column="QR_CODE_PICTURE" property="qrCodePicture" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, DEPT_ID, TENANT_ID, DISABLED, CREATE_USERID, CREATE_USERNAME, CREATE_IP, CREATE_DATETIME, 
+    UPDATE_USERID, UPDATE_USERNAME, UPDATE_IP, UPDATE_DATETIME, ORG_ID, DEVICE_TYPE_CODE, 
+    USE_LOCATION_CODE, NUMBER, MODEL, CATGEGROY, IS_RENT, IN_TIME, OUT_TIME, IN_OUT_STATUS, 
+    REMARK, ACCEPT_STATUS, ATTACHMENT_ID, IMAGE_ID, LICENSE_PLATE, ZHGD_DEPT_ID, ZHGD_DEPT_NAME, 
+    ZHGD_USER_ID, QR_CODE_PICTURE
+  </sql>
+
+</mapper>

@@ -1,0 +1,460 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.djzhgd.module.material.mapper.ZhgdMaterialStockRecordMapper">
+
+	<resultMap id="zhgdMaterialStockRecord" type="com.djzhgd.module.material.domain.ZhgdMaterialStockRecord">
+		<result property="id" column="id" />
+		<result property="disabled" column="disabled" />
+		<result property="createUserid" column="create_userid" />
+		<result property="createUsername" column="create_username" />
+		<result property="createDatetime" column="create_datetime" />
+		<result property="createIp" column="create_ip" />
+		<result property="updateUserid" column="update_userid" />
+		<result property="updateUsername" column="update_username" />
+		<result property="updateDatetime" column="update_datetime" />
+		<result property="updateIp" column="update_ip" />
+		<result property="model" column="model" />
+		<result property="materialName" column="material_name" />
+		<result property="materialType" column="material_type" />
+		<result property="bidsName" column="bids_name" />
+		<result property="number" column="number" />
+		<result property="unit" column="unit" />
+		<result property="tenantId" column="tenant_id"></result>
+		<result property="deptId" column="dept_id" />
+
+	</resultMap>
+	
+	<resultMap id="xyStockDataFirst" type="com.djzhgd.module.material.domain.ZhgdMaterialStockRecord">
+		<result property="sumGj" column="sum_gj" />
+	</resultMap>
+
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="zhgdMaterialStockRecord_columns">
+
+        ID, DISABLED, CREATE_USERID, CREATE_USERNAME, CREATE_DATETIME, CREATE_IP, UPDATE_USERID, UPDATE_USERNAME, UPDATE_DATETIME,
+        UPDATE_IP, MODEL, MATERIAL_NAME, MATERIAL_TYPE, BIDS_NAME, "NUMBER", UNIT,TENANT_ID,DEPT_ID
+
+	</sql>
+
+	<!-- 新增记录 -->
+	<insert id="save" parameterType="com.djzhgd.module.material.domain.ZhgdMaterialStockRecord">
+	    <![CDATA[
+	        INSERT INTO ZHGD_MATERIAL_STOCK_RECORD (
+	        	DISABLED,
+	        	CREATE_USERID,
+	        	CREATE_USERNAME,
+	        	CREATE_DATETIME,
+	        	CREATE_IP,
+	        	UPDATE_USERID,
+	        	UPDATE_USERNAME,
+	        	UPDATE_DATETIME,
+	        	UPDATE_IP,
+	        	MODEL,
+	        	MATERIAL_NAME,
+	        	MATERIAL_TYPE,
+	        	BIDS_NAME,
+	        	"NUMBER",
+	        	UNIT,
+	        	TENANT_ID,
+	        	DEPT_ID
+	        ) VALUES (
+	        	0, 
+	        	#{createUserid},
+	        	#{createUsername},
+	        	#{createDatetime},
+	        	#{createIp},
+	        	#{updateUserid},
+	        	#{updateUsername},
+	        	#{updateDatetime},
+	        	#{updateIp},
+	        	#{model},
+	        	#{materialName},
+	        	#{materialType},
+	        	#{bidsName},
+	        	#{number},
+	        	#{unit},
+	        	#{tenantId},
+	        	#{deptId}
+	        )
+	    ]]>
+
+		</insert>
+
+	<!-- 通过ID修改 -->
+	<update id="update" parameterType="com.djzhgd.module.material.domain.ZhgdMaterialStockRecord">
+	    <![CDATA[
+	        UPDATE ZHGD_MATERIAL_STOCK_RECORD SET
+		        DISABLED = #{disabled},
+		        CREATE_USERID = #{createUserid},
+		        CREATE_USERNAME = #{createUsername},
+		        CREATE_DATETIME = #{createDatetime},
+		        CREATE_IP = #{createIp},
+		        UPDATE_USERID = #{updateUserid},
+		        UPDATE_USERNAME = #{updateUsername},
+		        UPDATE_DATETIME = #{updateDatetime},
+		        UPDATE_IP = #{updateIp},
+		        MODEL = #{model},
+		        MATERIAL_NAME = #{materialName},
+		        MATERIAL_TYPE = #{materialType},
+		        BIDS_NAME = #{bidsName},
+		        "NUMBER" = #{number},
+		        UNIT = #{unit}
+	        WHERE 
+		        id = #{id}
+	    ]]>
+	</update>
+
+	<!-- 通过ID删除 -->
+	<delete id="delete">
+	    <![CDATA[
+	        DELETE FROM ZHGD_MATERIAL_STOCK_RECORD WHERE
+	        id = #{id}
+	    ]]>
+	</delete>
+
+	<!--&lt;!&ndash; 通过ID列表批量删除 &ndash;&gt;
+	<delete id="deleteByIds" parameterClass="java.lang.String">
+	    <![CDATA[
+	        DELETE FROM ZHGD_MATERIAL_STOCK_RECORD WHERE
+	        id IN ($ids$)
+	    ]]>
+	</delete>-->
+
+	<!-- 通过ID查询 -->
+	<select id="getById" resultMap="zhgdMaterialStockRecord">
+		SELECT
+		<include refid="zhgdMaterialStockRecord_columns" />
+	    <![CDATA[
+	        FROM ZHGD_MATERIAL_STOCK_RECORD 
+	        WHERE 
+		        id = #{id}
+	    ]]>
+	</select>
+
+<!--	 用于分页查询抽取的公共的条件
+	<sql id="zhgdMaterialStockRecord.queryPage">
+		<dynamic prepend="WHERE">
+		    <isNotNull property="entity">
+				<isNotEmpty prepend="AND" property="entity.id">
+		            <![CDATA[
+					id = #entity.id#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.disabled">
+		            <![CDATA[
+					disabled = #entity.disabled#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.createUserid">
+		            <![CDATA[
+					create_userid = #entity.createUserid#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.createUsername">
+		            <![CDATA[
+					create_username = #entity.createUsername#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.createDatetime">
+		            <![CDATA[
+					create_datetime = #entity.createDatetime#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.createIp">
+		            <![CDATA[
+					create_ip = #entity.createIp#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.updateUserid">
+		            <![CDATA[
+					update_userid = #entity.updateUserid#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.updateUsername">
+		            <![CDATA[
+					update_username = #entity.updateUsername#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.updateDatetime">
+		            <![CDATA[
+					update_datetime = #entity.updateDatetime#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.updateIp">
+		            <![CDATA[
+					update_ip = #entity.updateIp#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.model">
+		            <![CDATA[
+					model = #entity.model#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.materialName">
+		            <![CDATA[
+					material_name = #entity.materialName#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.materialType">
+		            <![CDATA[
+					material_type = #entity.materialType#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.bidsName">
+		            <![CDATA[
+					bids_name = #entity.bidsName#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.unit">
+		            <![CDATA[
+					unit = #entity.unit#
+		            ]]>
+				</isNotEmpty>
+			</isNotNull>
+			<isNotNull property="searchFilters">
+				<isNotEmpty prepend="AND" property="searchFilters.id">
+		            <![CDATA[
+					id $searchFilters.id.operation$ #searchFilters.id.value#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="searchFilters.disabled">
+		            <![CDATA[
+					disabled $searchFilters.disabled.operation$ #searchFilters.disabled.value#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="searchFilters.createUserid">
+		            <![CDATA[
+					create_userid $searchFilters.createUserid.operation$ #searchFilters.createUserid.value#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="searchFilters.createUsername">
+		            <![CDATA[
+					create_username $searchFilters.createUsername.operation$ #searchFilters.createUsername.value#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="searchFilters.createDatetime">
+		            <![CDATA[
+					create_datetime $searchFilters.createDatetime.operation$ #searchFilters.createDatetime.value#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="searchFilters.createIp">
+		            <![CDATA[
+					create_ip $searchFilters.createIp.operation$ #searchFilters.createIp.value#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="searchFilters.updateUserid">
+		            <![CDATA[
+					update_userid $searchFilters.updateUserid.operation$ #searchFilters.updateUserid.value#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="searchFilters.updateUsername">
+		            <![CDATA[
+					update_username $searchFilters.updateUsername.operation$ #searchFilters.updateUsername.value#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="searchFilters.updateDatetime">
+		            <![CDATA[
+					update_datetime $searchFilters.updateDatetime.operation$ #searchFilters.updateDatetime.value#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="searchFilters.updateIp">
+		            <![CDATA[
+					update_ip $searchFilters.updateIp.operation$ #searchFilters.updateIp.value#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="searchFilters.model">
+		            <![CDATA[
+					model $searchFilters.model.operation$ #searchFilters.model.value#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="searchFilters.materialName">
+		            <![CDATA[
+					material_name $searchFilters.materialName.operation$ #searchFilters.materialName.value#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="searchFilters.materialType">
+		            <![CDATA[
+					material_type $searchFilters.materialType.operation$ #searchFilters.materialType.value#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="searchFilters.bidsName">
+		            <![CDATA[
+					bids_name $searchFilters.bidsName.operation$ #searchFilters.bidsName.value#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="searchFilters.unit">
+		            <![CDATA[
+					unit $searchFilters.unit.operation$ #searchFilters.unit.value#
+		            ]]>
+				</isNotEmpty>
+			</isNotNull>
+		</dynamic>
+	</sql>-->
+
+	<!--&lt;!&ndash; 为分页查询符合条件的记录数 &ndash;&gt;
+	<select id="queryByPage_count" resultClass="int">
+		SELECT count(*) FROM ZHGD_MATERIAL_STOCK_RECORD
+		<include refid="zhgdMaterialStockRecord.queryPage" />
+	</select>-->
+
+
+<!--	&lt;!&ndash; 分页查询指定页记录 &ndash;&gt;
+	<select id="queryByPage" resultMap="zhgdMaterialStockRecord">
+		select top 
+		<![CDATA[
+		$paging.pageSize$ *
+		]]>
+		<![CDATA[
+		FROM (
+	 		select row_number() over (order by 
+		]]>
+		        id
+		<![CDATA[
+			) rownumber,* FROM  ZHGD_MATERIAL_STOCK_RECORD
+			]]>
+			<include refid="zhgdMaterialStockRecord.queryPage" />
+		<![CDATA[
+		) A
+		where rownumber > $paging.startRecord$
+		]]>
+
+	</select>-->
+	
+
+	<!-- 查询所有记录 -->
+<!--	<select id="queryAll" resultMap="zhgdMaterialStockRecord">
+		SELECT
+		<include refid="zhgdMaterialStockRecord.columns" />
+	    <![CDATA[
+		    FROM ZHGD_MATERIAL_STOCK_RECORD
+	    ]]>
+	    <include refid="zhgdMaterialStockRecord.queryPage" />
+	</select>-->
+	
+	<select id="queryByTypeAndNameProId" resultMap="zhgdMaterialStockRecord">
+		SELECT
+		<include refid="zhgdMaterialStockRecord_columns" />
+	    <![CDATA[
+		    FROM ZHGD_MATERIAL_STOCK_RECORD
+	    ]]>
+	    WHERE MATERIAL_NAME = #{materialName}
+	    <if test="materialType != null " >
+			and MATERIAL_TYPE = #{materialType}
+		</if>
+	<!--	<if test=" materialType == null">
+            <![CDATA[
+			isnull(material_type,'') = ''
+            ]]>
+		</if>-->
+
+		<if test="bidsName != null">
+			and BIDS_NAME = #{bidsName}
+		</if>
+
+		<if test="tenantId != null">
+			and TENANT_ID = #{tenantId}
+		</if>
+		<if test="deptId != null">
+			and DEPT_ID = #{deptId}
+		</if>
+	</select>
+	
+	<!-- 查詢钢筋入库量 -->
+	<select id="queryTypeFirstAndProId" resultMap="xyStockDataFirst">
+		SELECT
+			ISNULL(SUM(sum_gj), 0) AS sum_gj
+		FROM
+			(
+				SELECT
+					ISNULL(SUM(number), 0) AS sum_gj
+				FROM
+					ZHGD_MATERIAL_INSTOCK
+				WHERE
+				1=1 and unit='吨'
+				<if test="materialName  != null">
+					and material_name=#{materialName}
+				</if>
+				<if test="materialType ！= null" >
+					and material_type=#{materialType}
+				</if>
+				<if test="bidsName != null">
+					and bids_name=#{bidsName}
+				</if>
+				<if test="tenantId != null">
+					and tenant_id=#{tenantId}
+				</if>
+				<if test="deptId != null">
+					and dept_id=#{deptId}
+				</if>
+				union
+				
+				SELECT
+					ISNULL(SUM(number)/1000, 0) AS sum_gj
+				FROM
+					ZHGD_MATERIAL_INSTOCK
+				WHERE
+				1=1 and unit='千克'
+				<if test="materialName  != null">
+					and material_name=#{materialName}
+				</if>
+				<if test="materialType ！= null" >
+					and material_type=#{materialType}
+				</if>
+				<if test="bidsName != null">
+					and bids_name=#{bidsName}
+				</if>
+				<if test="tenantId != null">
+					and tenant_id=#{tenantId}
+				</if>
+				<if test="deptId != null">
+					and dept_id=#{deptId}
+				</if>
+				union
+				
+				SELECT
+					ISNULL(SUM(number)*1.35, 0) AS sum_gj
+				FROM
+					ZHGD_MATERIAL_INSTOCK
+				WHERE
+				1=1 and unit='立方米'
+				<if test="materialName  != null">
+					and material_name=#{materialName}
+				</if>
+				<if test="materialType ！= null" >
+					and material_type=#{materialType}
+				</if>
+				<if test="bidsName != null">
+					and bids_name=#{bidsName}
+				</if>
+				<if test="tenantId != null">
+					and tenant_id=#{tenantId}
+				</if>
+				<if test="deptId != null">
+					and dept_id=#{deptId}
+				</if>
+				
+			) t
+	</select>
+	
+	<select id="queryGroupByMaterialNameAndProId" resultType="com.djzhgd.module.material.domain.ZhgdMaterialStockRecord">
+		SELECT
+		      material_name AS materialName,
+		      dept_id as deptId,
+		      	cast(SUM(number)  as decimal(18,3))  AS sumNumber
+		FROM
+			ZHGD_MATERIAL_STOCK_RECORD  where dept_id = #{deptId}
+		GROUP BY
+			material_name,dept_id
+	</select>
+
+	<select id="queryGroupByMaterialName" resultType="com.djzhgd.module.material.domain.ZhgdMaterialStockRecord">
+		SELECT
+		      material_name AS materialName,
+		      	cast(SUM(number)  as decimal(18,3))  AS sumNumber,
+		      	dept_id as deptId
+		FROM
+			ZHGD_MATERIAL_STOCK_RECORD where dept_id = #{deptId}
+		GROUP BY
+			material_name,dept_id
+	</select>
+</mapper>

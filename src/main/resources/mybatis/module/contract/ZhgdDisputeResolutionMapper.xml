@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.djzhgd.module.contract.mapper.ZhgdDisputeResolutionMapper" >
+  <resultMap id="BaseResultMap" type="com.djzhgd.module.contract.domain.ZhgdDisputeResolution" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="DEPT_ID" property="deptId" jdbcType="DECIMAL" />
+    <result column="TENANT_ID" property="tenantId" jdbcType="DECIMAL" />
+    <result column="DISABLED" property="disabled" jdbcType="DECIMAL" />
+    <result column="CREATE_USERID" property="createUserid" jdbcType="DECIMAL" />
+    <result column="CREATE_USERNAME" property="createUsername" jdbcType="VARCHAR" />
+    <result column="CREATE_IP" property="createIp" jdbcType="VARCHAR" />
+    <result column="CREATE_DATETIME" property="createDatetime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_USERID" property="updateUserid" jdbcType="DECIMAL" />
+    <result column="UPDATE_USERNAME" property="updateUsername" jdbcType="VARCHAR" />
+    <result column="UPDATE_IP" property="updateIp" jdbcType="VARCHAR" />
+    <result column="UPDATE_DATETIME" property="updateDatetime" jdbcType="TIMESTAMP" />
+    <result column="TITLE" property="title" jdbcType="VARCHAR" />
+    <result column="CONTENT" property="content" jdbcType="VARCHAR" />
+    <result column="TREATMENT_PLAN" property="treatmentPlan" jdbcType="VARCHAR" />
+    <result column="HANDLER" property="handler" jdbcType="VARCHAR" />
+    <result column="HANDLE_TIME" property="handleTime" jdbcType="TIMESTAMP" />
+    <result column="STATUS" property="status" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, DEPT_ID, TENANT_ID, DISABLED, CREATE_USERID, CREATE_USERNAME, CREATE_IP, CREATE_DATETIME, 
+    UPDATE_USERID, UPDATE_USERNAME, UPDATE_IP, UPDATE_DATETIME, TITLE, CONTENT, TREATMENT_PLAN, 
+    HANDLER, HANDLE_TIME, STATUS
+  </sql>
+
+</mapper>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.djzhgd.module.contract.mapper.ZhgdTenderingBiddingMapper" >
+  <resultMap id="BaseResultMap" type="com.djzhgd.module.contract.domain.ZhgdTenderingBidding" >
+    <id column="ID" property="id"  />
+    <result column="DEPT_ID" property="deptId" />
+    <result column="TENANT_ID" property="tenantId" />
+    <result column="ASS_TITLE" property="assTitle" />
+    <result column="UP_USER" property="upUser"  />
+    <result column="REMARK" property="remark"  />
+    <result column="DISABLED" property="disabled"  />
+    <result column="CREATE_USERID" property="createUserid"  />
+    <result column="CREATE_USERNAME" property="createUsername"  />
+    <result column="CREATE_DATETIME" property="createDatetime" />
+    <result column="CREATE_IP" property="createIp"  />
+    <result column="UPDATE_USERID" property="updateUserid"  />
+    <result column="UPDATE_USERNAME" property="updateUsername"  />
+    <result column="UPDATE_DATETIME" property="updateDatetime"  />
+    <result column="UPDATE_IP" property="updateIp" />
+    <result column="VERSION" property="version" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, DEPT_ID, TENANT_ID, ASS_TITLE, UP_USER, REMARK, DISABLED, CREATE_USERID, CREATE_USERNAME, 
+    CREATE_DATETIME, CREATE_IP, UPDATE_USERID, UPDATE_USERNAME, UPDATE_DATETIME, UPDATE_IP, 
+    VERSION
+  </sql>
+</mapper>

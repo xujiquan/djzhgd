@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.djzhgd.module.people.mapper.ZhgdAttendanceWorkdayMapper" >
+  <resultMap id="BaseResultMap" type="com.djzhgd.module.people.domain.ZhgdAttendanceWorkday" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="DEPT_ID" property="deptId" jdbcType="DECIMAL" />
+    <result column="TENANT_ID" property="tenantId" jdbcType="DECIMAL" />
+    <result column="DISABLED" property="disabled" jdbcType="DECIMAL" />
+    <result column="CREATE_USERID" property="createUserid" jdbcType="DECIMAL" />
+    <result column="CREATE_USERNAME" property="createUsername" jdbcType="VARCHAR" />
+    <result column="CREATE_IP" property="createIp" jdbcType="VARCHAR" />
+    <result column="CREATE_DATETIME" property="createDatetime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_USERID" property="updateUserid" jdbcType="DECIMAL" />
+    <result column="UPDATE_USERNAME" property="updateUsername" jdbcType="VARCHAR" />
+    <result column="UPDATE_IP" property="updateIp" jdbcType="VARCHAR" />
+    <result column="UPDATE_DATETIME" property="updateDatetime" jdbcType="TIMESTAMP" />
+    <result column="WORK_YEAR" property="workYear" jdbcType="DECIMAL" />
+    <result column="WORK_MONTH" property="workMonth" jdbcType="DECIMAL" />
+    <result column="WORK_DAY" property="workDay" jdbcType="DECIMAL" />
+    <result column="WORK_DATE" property="workDate" jdbcType="TIMESTAMP" />
+    <result column="WORK_TYPE" property="workType" jdbcType="DECIMAL" />
+    <result column="WORK_NAME" property="workName" jdbcType="VARCHAR" />
+    <result column="WORK_CODE" property="workCode" jdbcType="VARCHAR" />
+    <result column="DATA_SCOPE" property="dataScope" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, DEPT_ID, TENANT_ID, DISABLED, CREATE_USERID, CREATE_USERNAME, CREATE_IP, CREATE_DATETIME, 
+    UPDATE_USERID, UPDATE_USERNAME, UPDATE_IP, UPDATE_DATETIME, WORK_YEAR, WORK_MONTH, 
+    WORK_DAY, WORK_DATE, WORK_TYPE, WORK_NAME, WORK_CODE, DATA_SCOPE
+  </sql>
+
+</mapper>

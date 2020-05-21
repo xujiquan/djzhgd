@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.djzhgd.module.material.mapper.ZhgdMaterialDetectionMapper">
+
+    <!-- 可根据自己的需求，是否要使用 -->
+    <resultMap id="zhgdMaterialDetection" type="com.djzhgd.module.material.domain.ZhgdMaterialDetection">
+        <id column="id" property="id"/>
+        <result column="disabled" property="disabled"/>
+        <result column="create_userid" property="createUserid"/>
+        <result column="create_username" property="createUsername"/>
+        <result column="create_datetime" property="createDatetime"/>
+        <result column="create_ip" property="createIp"/>
+        <result column="update_userid" property="updateUserid"/>
+        <result column="update_username" property="updateUsername"/>
+        <result column="update_datetime" property="updateDatetime"/>
+        <result column="update_ip" property="updateIp"/>
+        <result column="instock_batch" property="instockBatch"/>
+        <result column="model" property="model"/>
+        <result column="plate" property="plate"/>
+        <result column="number" property="number"/>
+        <result column="material_name" property="materialName"/>
+        <result column="engineering_site" property="engineeringSite"/>
+        <result column="check_user" property="checkUser"/>
+        <result column="check_time" property="checkTime"/>
+        <result column="check_image" property="checkImage"/>
+        <result column="detection_type" property="detectionType"/>
+        <result column="detection_no" property="detectionNo"/>
+        <result column="remark" property="remark"/>
+        <result column="check_result" property="checkResult"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result property="deptId" column="dept_id"/>
+
+
+    </resultMap>
+
+    <!-- demo表所有的列 -->
+    <sql id="zhgdMaterialDetection_columns">
+       id, disabled, create_userid, create_username, create_datetime, create_ip, update_userid,
+    update_username, update_datetime, update_ip, instock_batch, model, plate, number,
+    material_name, engineering_site, check_user, check_time, check_image, detection_type,
+    detection_no, remark, check_result,tenant_id,dept_id
+
+    </sql>
+    <select id="queryGroupByNameAndResultAndBatchAndDTNoPass"
+            resultType="com.djzhgd.module.material.domain.ZhgdMaterialDetection">
+		SELECT
+			t1.material_name AS materialName,
+			t1.instock_batch AS instockBatch,
+			t1.detection_type AS detectionType,
+			t1.check_result AS checkResult,
+			t1.dept_id as deptId
+		FROM
+			(
+			SELECT
+				material_name,
+				instock_batch,
+				detection_type,
+				check_result,
+				dept_id
+			FROM
+				ZHGD_MATERIAL_DETECTION  WHERE (check_result =0 or check_result =1) and dept_id = #{deptId}
+			GROUP BY
+				material_name,
+				instock_batch,
+				detection_type,
+				check_result,
+				dept_id
+			) t1 ORDER BY t1.material_name,t1.instock_batch,t1.check_result desc
+	</select>
+
+    <insert id="save" parameterType="com.djzhgd.module.material.domain.ZhgdMaterialDetection">
+		<![CDATA[
+
+	        INSERT INTO ZHGD_MATERIAL_DETECTION (
+	        	disabled,
+	        	create_userid,
+	        	create_username,
+	        	create_datetime,
+	        	create_ip,
+	        	update_userid,
+	        	update_username,
+	        	update_datetime,
+	        	update_ip,
+	        	instock_batch,
+	        	model,
+	        	plate,
+	        	number,
+	        	material_name,
+	        	engineering_site,
+	        	check_user,
+	        	check_time,
+	        	check_image,
+	        	detection_type,
+	        	detection_no,
+	        	remark,
+	        	check_result,
+	        	tenant_id,
+	        	dept_id
+	        ) VALUES (
+	        	0,
+	        	#{createUserid},
+	        	#{createUsername},
+	        	#{createDatetime},
+	        	#{createIp},
+	        	#{updateUserid},
+	        	#{updateUsername},
+	        	#{updateDatetime},
+	        	#{updateIp},
+	        	#{instockBatch},
+	        	#{model},
+	        	#{plate},
+	        	#{number},
+	        	#{materialName},
+	        	#{engineeringSite},
+	        	#{checkUser},
+	        	#{checkTime},
+	        	#{checkImage},
+	        	#{detectionType},
+	        	#{detectionNo},
+	        	#{remark},
+	        	#{checkResult},
+	        	#{tenantId},
+	        	#{deptId}
+	        )
+
+        ]]>
+
+	</insert>
+
+    <select id="getByInStockBatchAndTenId" parameterType="map"
+            resultType="com.djzhgd.module.material.domain.ZhgdMaterialDetection">
+
+        SELECT
+        <include refid="zhgdMaterialDetection_columns"/>
+
+        FROM ZHGD_MATERIAL_DETECTION
+        WHERE
+        instock_batch = #{instockBatch}
+        and
+        detection_type = #{detectionType}
+        and
+        dept_id = #{deptId}
+        and
+        check_result is not null
+    </select>
+
+    <select id="getById" resultType="com.djzhgd.module.material.domain.ZhgdMaterialDetection" parameterType="map">
+        SELECT
+        <include refid="zhgdMaterialDetection_columns"/>
+        <![CDATA[
+	        FROM ZHGD_MATERIAL_DETECTION
+	        WHERE
+		        id = #{id}
+	    ]]>
+    </select>
+
+    <select id="queryAllByMap" parameterType="map" resultType="com.djzhgd.module.material.domain.ZhgdMaterialDetection">
+
+        select
+        <include refid="zhgdMaterialDetection_columns"/>
+        FROM ZHGD_MATERIAL_DETECTION
+        <where>
+            <if test="instockBatch != null and instockBatch != ''">
+                 instock_batch = #{instockBatch}
+            </if>
+            <if test="detectionType != null and detectionType != ''">
+                and detection_type = #{detectionType}
+            </if>
+        </where>
+
+    </select>
+
+    <select id="queryGroupByNameAndResultAndBatchNoPass" resultType="com.djzhgd.module.material.domain.ZhgdMaterialDetection">
+		SELECT
+			material_name AS materialName,
+			instock_batch AS instockBatch
+		FROM
+			ZHGD_MATERIAL_DETECTION
+		WHERE
+			check_result=0
+			<if test="deptId != null">
+                and dept_id = #{deptId}
+            </if>
+		GROUP BY
+			material_name, instock_batch
+        <if test="deptId != null">
+            , dept_id
+        </if>
+
+	</select>
+
+        <select id="queryGroupByNameAndBatch" resultType="com.djzhgd.module.material.domain.ZhgdMaterialDetection">
+		SELECT
+		material_name AS materialName,
+		COUNT ( material_name ) AS COUNT
+		FROM
+		(
+		SELECT
+		material_name,
+		instock_batch
+		FROM
+		ZHGD_MATERIAL_DETECTION
+		WHERE
+		check_result != 2
+		<if test="deptId !=null">
+            and dept_id = #{deptId}
+        </if>
+		GROUP BY
+		 material_name,
+		 instock_batch
+         <if test="deptId !=null">
+                , dept_id
+         </if>
+		 ) t1
+		GROUP BY
+		material_name
+	</select>
+    <select id="queryGroupByNameAndResultAndBatch"  resultType="com.djzhgd.module.material.domain.ZhgdMaterialDetection">
+
+		SELECT
+			material_name AS materialName,
+			instock_batch AS instockBatch,
+			depe_id
+	    FROM
+			ZHGD_MATERIAL_DETECTION
+		WHERE
+			check_result != 2 and depe_id = #{deptId}
+		GROUP BY
+			material_name, instock_batch,depe_id
+    </select>
+
+    <resultMap  id="stockCheckResult" type="com.djzhgd.module.material.domain.ZhgdMaterialDetection">
+        <result property="detectionType" column="detection_type" />
+        <result property="num" column="num" />
+        <result property="checkNum" column="check_num" />
+    </resultMap>
+    <select id="stockCheckByDeptId" resultMap="stockCheckResult">
+	SELECT
+				detection_type,
+				sum(num) AS num,
+				sum(check_num) AS check_num,
+				dept_id
+		FROM
+			(
+		SELECT detection_type,count(*) num ,0 as check_num,dept_id from zhgd_material_detection GROUP BY detection_type,dept_id UNION
+		SELECT 1 as detection_type,0 as num ,0 as check_num,dept_id from zhgd_material_detection UNION
+		SELECT 2 as detection_type,0 as num ,0 as check_num,dept_id from zhgd_material_detection UNION
+		SELECT 3 as detection_type,0 as num ,0 as check_num,dept_id from zhgd_material_detection UNION
+		SELECT detection_type,0 as num ,count(*) check_num,dept_id from zhgd_material_detection where check_result != 2 and dept_id =#{deptId}
+		GROUP BY detection_type,dept_id)tt
+		GROUP BY
+			detection_type,dept_id
+	</select>
+</mapper>

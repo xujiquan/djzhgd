@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.djzhgd.module.people.mapper.ZhgdAttendanceMapper" >
+  <resultMap id="BaseResultMap" type="com.djzhgd.module.people.domain.ZhgdAttendance" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="DEPT_ID" property="deptId" jdbcType="DECIMAL" />
+    <result column="TENANT_ID" property="tenantId" jdbcType="DECIMAL" />
+    <result column="DISABLED" property="disabled" jdbcType="DECIMAL" />
+    <result column="CREATE_USERID" property="createUserid" jdbcType="DECIMAL" />
+    <result column="CREATE_USERNAME" property="createUsername" jdbcType="VARCHAR" />
+    <result column="CREATE_IP" property="createIp" jdbcType="VARCHAR" />
+    <result column="CREATE_DATETIME" property="createDatetime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_USERID" property="updateUserid" jdbcType="DECIMAL" />
+    <result column="UPDATE_USERNAME" property="updateUsername" jdbcType="VARCHAR" />
+    <result column="UPDATE_IP" property="updateIp" jdbcType="VARCHAR" />
+    <result column="UPDATE_DATETIME" property="updateDatetime" jdbcType="TIMESTAMP" />
+    <result column="USER_ID" property="userId" jdbcType="DECIMAL" />
+    <result column="CHECK_ID" property="checkId" jdbcType="DECIMAL" />
+    <result column="CHECK_NAME" property="checkName" jdbcType="VARCHAR" />
+    <result column="CHECK_TIME" property="checkTime" jdbcType="TIMESTAMP" />
+    <result column="CHECK_SN" property="checkSn" jdbcType="VARCHAR" />
+    <result column="FILE_PATH" property="filePath" jdbcType="VARCHAR" />
+    <result column="DATA_TYPE" property="dataType" jdbcType="DECIMAL" />
+    <result column="COMPANY_NAME" property="companyName" jdbcType="VARCHAR" />
+    <result column="POST_NAME" property="postName" jdbcType="VARCHAR" />
+    <result column="ZHGD_USER_ID" property="zhgdUserId" jdbcType="DECIMAL" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="PHOTO_PATH" property="photoPath" jdbcType="VARCHAR" />
+    <result column="FILE_NAME" property="fileName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, DEPT_ID, TENANT_ID, DISABLED, CREATE_USERID, CREATE_USERNAME, CREATE_IP, CREATE_DATETIME, 
+    UPDATE_USERID, UPDATE_USERNAME, UPDATE_IP, UPDATE_DATETIME, USER_ID, CHECK_ID, CHECK_NAME, 
+    CHECK_TIME, CHECK_SN, FILE_PATH, DATA_TYPE, COMPANY_NAME, POST_NAME, ZHGD_USER_ID, 
+    REMARK, PHOTO_PATH, FILE_NAME
+  </sql>
+
+</mapper>

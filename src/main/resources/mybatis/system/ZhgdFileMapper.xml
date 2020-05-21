@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.djzhgd.project.system.mapper.ZhgdFileMapper">
+  <resultMap id="BaseResultMap" type="com.djzhgd.project.system.domain.ZhgdFile">
+    <result column="ID" property="id" />
+    <result column="DEPT_ID"  property="deptId" />
+    <result column="TENANT_ID"  property="tenantId" />
+    <result column="PARENT_ID"  property="parentId" />
+    <result column="FORM"  property="form" />
+    <result column="FILE_NAME"  property="fileName" />
+    <result column="FILE_PATH"  property="filePath" />
+    <result column="FILE_TYPE"  property="fileType" />
+    <result column="FILE_THUMB_PATH"  property="fileThumbPath" />
+    <result column="FILE_THUMB_NAME"  property="fileThumbName" />
+    <result column="CONNECT_KEY"  property="connectKey" />
+    <result column="CONNECT_TYPE"  property="connectType" />
+    <result column="REMARK"  property="remark" />
+    <result column="DISABLED"  property="disabled" />
+    <result column="CREATE_USERID"  property="createUserid" />
+    <result column="CREATE_USERNAME"  property="createUsername" />
+    <result column="CREATE_DATETIME"  property="createDatetime" />
+    <result column="CREATE_IP"  property="createIp" />
+    <result column="UPDATE_USERID"  property="updateUserid" />
+    <result column="UPDATE_USERNAME"  property="updateUsername" />
+    <result column="UPDATE_DATETIME" property="updateDatetime" />
+    <result column="UPDATE_IP"  property="updateIp" />
+    <result column="VERSION"  property="version" />
+  </resultMap>
+
+  <sql id="selectZhgdFileVo">
+        select ID, DEPT_ID, TENANT_ID, PARENT_ID, FORM, FILE_NAME, FILE_PATH, FILE_TYPE, FILE_THUMB_PATH, FILE_THUMB_NAME, CONNECT_KEY,CONNECT_TYPE,
+        REMARK,DISABLED,CREATE_USERID,CREATE_USERNAME,CREATE_DATETIME,CREATE_IP,UPDATE_USERID,UPDATE_USERNAME,UPDATE_DATETIME,UPDATE_IP,VERSION
+		from ZHGD_FILE
+    </sql>
+</mapper>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.djzhgd.module.people.mapper.ZhgdUserMapper">
+  <resultMap id="BaseResultMap" type="com.djzhgd.module.people.domain.ZhgdUser">
+    <result column="ID" jdbcType="DECIMAL" property="id" />
+    <result column="DISABLED" jdbcType="DECIMAL" property="disabled" />
+    <result column="CREATE_USERID" jdbcType="DECIMAL" property="createUserid" />
+    <result column="CREATE_USERNAME" jdbcType="VARCHAR" property="createUsername" />
+    <result column="CREATE_DATETIME" jdbcType="TIMESTAMP" property="createDatetime" />
+    <result column="CREATE_IP" jdbcType="VARCHAR" property="createIp" />
+    <result column="UPDATE_USERID" jdbcType="DECIMAL" property="updateUserid" />
+    <result column="UPDATE_USERNAME" jdbcType="VARCHAR" property="updateUsername" />
+    <result column="UPDATE_DATETIME" jdbcType="TIMESTAMP" property="updateDatetime" />
+    <result column="UPDATE_IP" jdbcType="VARCHAR" property="updateIp" />
+    <result column="USER_NAME" jdbcType="VARCHAR" property="userName" />
+    <result column="COMPANY_NAME" jdbcType="VARCHAR" property="companyName" />
+    <result column="USER_TYPE" jdbcType="VARCHAR" property="userType" />
+    <result column="POST_NAME" jdbcType="VARCHAR" property="postName" />
+    <result column="ENTER_DATE" jdbcType="TIMESTAMP" property="enterDate" />
+    <result column="ZHGD_DEPT_NAME" jdbcType="VARCHAR" property="zhgdDeptName" />
+    <result column="ZHGD_DEPT_CODE" jdbcType="VARCHAR" property="zhgdDeptCode" />
+    <result column="ZHGD_DEPT_ID" jdbcType="DECIMAL" property="zhgdDeptId" />
+    <result column="PHOTO_PATH" jdbcType="VARCHAR" property="photoPath" />
+    <result column="ID_NUMBER" jdbcType="VARCHAR" property="idNumber" />
+    <result column="PHONE_NUM" jdbcType="VARCHAR" property="phoneNum" />
+    <result column="IF_PRESENT" jdbcType="DECIMAL" property="ifPresent" />
+    <result column="SEX" jdbcType="VARCHAR" property="sex" />
+    <result column="BIRTH_DATE" jdbcType="VARCHAR" property="birthDate" />
+    <result column="AGE" jdbcType="DECIMAL" property="age" />
+    <result column="NATION" jdbcType="VARCHAR" property="nation" />
+    <result column="EDU_BACKGROUND" jdbcType="VARCHAR" property="eduBackground" />
+    <result column="BLOOD_TYPE" jdbcType="VARCHAR" property="bloodType" />
+    <result column="NATIVE_PLACE" jdbcType="VARCHAR" property="nativePlace" />
+    <result column="HOME_ADDRESS" jdbcType="VARCHAR" property="homeAddress" />
+    <result column="MEDICAL_HISTORY" jdbcType="VARCHAR" property="medicalHistory" />
+    <result column="REMARK" jdbcType="VARCHAR" property="remark" />
+    <result column="CHECK_ID" jdbcType="VARCHAR" property="checkId" />
+    <result column="CARD" jdbcType="VARCHAR" property="card" />
+    <result column="CENTIFICATE_CATEGORY" jdbcType="VARCHAR" property="centificateCategory" />
+    <result column="CENTIFICATE_NO" jdbcType="VARCHAR" property="centificateNo" />
+    <result column="CENTIFICATE_COMPANY" jdbcType="VARCHAR" property="centificateCompany" />
+    <result column="CENTIFICATE_RELEASE_TIME" jdbcType="VARCHAR" property="centificateReleaseTime" />
+    <result column="QR_CODE_PATH" jdbcType="VARCHAR" property="qrCodePath" />
+    <result column="ID_CARD_PATH" jdbcType="VARCHAR" property="idCardPath" />
+    <result column="ID_CARD_REVERSE_PATH" jdbcType="VARCHAR" property="idCardReversePath" />
+    <result column="OTHER_SYS_USER_UNIQUE" jdbcType="VARCHAR" property="otherSysUserUnique" />
+    <result column="CERTIFICATE_EFFECTIVE_TIME" jdbcType="VARCHAR" property="certificateEffectiveTime" />
+    <result column="KEEP_USER_ID" jdbcType="VARCHAR" property="keepUserId" />
+    <result column="QR_CODE_PICTURE" jdbcType="VARCHAR" property="qrCodePicture" />
+    <result column="GROUPS" jdbcType="DECIMAL" property="groups" />
+    <result column="CONTRACT_NUMBER" jdbcType="VARCHAR" property="contractNumber" />
+    <result column="PHONE_TYPE" jdbcType="DECIMAL" property="phoneType" />
+    <result column="WORKING_TEAM" jdbcType="VARCHAR" property="workingTeam" />
+    <result column="SJJY_GSJ" jdbcType="VARCHAR" property="sjjyGsj" />
+    <result column="SJJY_XMJ" jdbcType="VARCHAR" property="sjjyXmj" />
+    <result column="SJJY_BZJ" jdbcType="VARCHAR" property="sjjyBzj" />
+    <result column="TEST_SCORES" jdbcType="VARCHAR" property="testScores" />
+    <result column="ZRSQDSJ" jdbcType="VARCHAR" property="zrsqdsj" />
+    <result column="SQJDSJ" jdbcType="VARCHAR" property="sqjdsj" />
+    <result column="CENTIFICATE_PATH" jdbcType="CLOB" property="centificatePath" />
+  </resultMap>
+
+</mapper>

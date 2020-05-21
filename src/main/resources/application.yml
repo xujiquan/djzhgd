@@ -1,0 +1,28 @@
+# Spring配置
+spring:
+  profiles:
+    # 本地开发环境配置
+    active: druid
+    # 测试环境配置
+    #active: test
+    # 生产环境配置
+    #active: prod
+djzhgd:
+  tenant:
+    ignoreTenantTables:
+      - sys_tenant
+      - sys_menu
+      - sys_user_role
+      - sys_role_menu
+      - sys_role_dept
+      - sys_user_role
+      - sys_dict_item
+      - sys_logininfor
+      - sys_role
+      - sys_user
+      - TABLES
+      - COLUMNS
+      - sys_job
+      - sys_dict_data
+    tenantIdColumn: dept_id
+

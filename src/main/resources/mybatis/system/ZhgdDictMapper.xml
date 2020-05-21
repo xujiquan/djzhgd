@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.djzhgd.project.system.mapper.ZhgdDictMapper" >
+  <resultMap id="BaseResultMap" type="com.djzhgd.project.system.domain.ZhgdDict" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="DEPT_ID" property="deptId" jdbcType="DECIMAL" />
+    <result column="TENANT_ID" property="tenantId" jdbcType="DECIMAL" />
+    <result column="GROUP_CODE" property="groupCode" jdbcType="VARCHAR" />
+    <result column="GROUP_NAME" property="groupName" jdbcType="VARCHAR" />
+    <result column="DATA_CODE" property="dataCode" jdbcType="VARCHAR" />
+    <result column="DATA_VALUE" property="dataValue" jdbcType="VARCHAR" />
+    <result column="PARENT_ID" property="parentId" jdbcType="VARCHAR" />
+    <result column="PID" property="pid" jdbcType="VARCHAR" />
+    <result column="SORT_NO" property="sortNo" jdbcType="DECIMAL" />
+    <result column="DISABLED" property="disabled" jdbcType="DECIMAL" />
+    <result column="CREATE_USERID" property="createUserid" jdbcType="VARCHAR" />
+    <result column="CREATE_USERNAME" property="createUsername" jdbcType="VARCHAR" />
+    <result column="CREATE_IP" property="createIp" jdbcType="VARCHAR" />
+    <result column="CREATE_DATETIME" property="createDatetime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_USERID" property="updateUserid" jdbcType="VARCHAR" />
+    <result column="UPDATE_USERNAME" property="updateUsername" jdbcType="VARCHAR" />
+    <result column="UPDATE_IP" property="updateIp" jdbcType="VARCHAR" />
+    <result column="UPDATE_DATETIME" property="updateDatetime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.djzhgd.project.system.domain.ZhgdDict" extends="BaseResultMap" >
+    <result column="REMARK" property="remark" jdbcType="CLOB" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, DEPT_ID, TENANT_ID, GROUP_CODE, GROUP_NAME, DATA_CODE, DATA_VALUE, PARENT_ID,PID,
+    SORT_NO, DISABLED, CREATE_USERID, CREATE_USERNAME, CREATE_IP, CREATE_DATETIME, UPDATE_USERID, 
+    UPDATE_USERNAME, UPDATE_IP, UPDATE_DATETIME
+  </sql>
+  <sql id="Blob_Column_List" >
+    REMARK
+  </sql>
+
+  <select id="getUrlByDeptid" parameterType="String" resultMap="BaseResultMap">
+	select
+	    <include refid="Base_Column_List"/>
+	    from ZHGD_DICT where DEPT_ID = #{deptId}
+       <if test="groupCode != null and groupCode != ''">
+        and GROUP_CODE = #{groupCode}
+       </if>
+
+ </select>
+  <select id="getDataCodeByDeptid" parameterType="String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from ZHGD_DICT where DEPT_ID = #{deptId} and DATA_CODE = #{dataCode}
+  </select>
+</mapper>

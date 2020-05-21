@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.djzhgd.module.people.mapper.ZhgdSafeActivityMapper" >
+  <resultMap id="BaseResultMap" type="com.djzhgd.module.people.domain.ZhgdSafeActivity" >
+    <id column="ID" property="id"  />
+    <result column="DEPT_ID" property="deptId" />
+    <result column="TENANT_ID" property="tenantId"  />
+    <result column="DEPT_NAME" property="deptName"  />
+    <result column="TYPE" property="type"  />
+    <result column="TECHNICAL_TYPE" property="technicalType"  />
+    <result column="NAME" property="name"  />
+    <result column="ORGANIZER" property="organizer" />
+    <result column="SITE" property="site"  />
+    <result column="START_TIME" property="startTime"  />
+    <result column="SPEAKER" property="speaker"  />
+    <result column="RECORDER" property="recorder" />
+    <result column="WAY" property="way"  />
+    <result column="PERIOD" property="period"  />
+    <result column="JOIN_DEPARTMENT" property="joinDepartment" />
+    <result column="STATUS" property="status"  />
+    <result column="ARCHIVE_TIME" property="archiveTime" />
+    <result column="CONTENT" property="content"  />
+    <result column="FILE_PATH" property="filePath"  />
+    <result column="FILE_NAME" property="fileName"  />
+    <result column="ZHGD_DEPT_CODE" property="zhgdDeptCode"  />
+    <result column="ZHGD_DEPT_ID" property="zhgdDeptId"  />
+    <result column="DISABLED" property="disabled"  />
+    <result column="CREATE_USERID" property="createUserid"  />
+    <result column="CREATE_USERNAME" property="createUsername"  />
+    <result column="CREATE_DATETIME" property="createDatetime"  />
+    <result column="CREATE_IP" property="createIp"  />
+    <result column="UPDATE_USERID" property="updateUserid"  />
+    <result column="UPDATE_USERNAME" property="updateUsername"  />
+    <result column="UPDATE_DATETIME" property="updateDatetime"  />
+    <result column="UPDATE_IP" property="updateIp"  />
+    <result column="VERSION" property="version" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, dept_id, tenant_id, dept_name, type, technical_type, name, organizer, site, start_time,
+    speaker, recorder, way, period, join_department, status, archive_time, content, file_path,
+    file_name, zhgd_dept_code, DISABLED, CREATE_USERID, CREATE_USERNAME, CREATE_DATETIME,
+    CREATE_IP, UPDATE_USERID, UPDATE_USERNAME, UPDATE_DATETIME, UPDATE_IP, VERSION
+  </sql>
+
+  <resultMap id="zhgdSafeActivity_other" type="com.djzhgd.module.people.domain.vo.ZhgdSafeActivityVo">
+    <result property="num" column="num" />
+    <result property="yearMonth" column="yearMonth" />
+  </resultMap>
+
+  <resultMap id="zhgdSafeActivity_count" type="com.djzhgd.module.people.domain.vo.ZhgdSafeActivityVo">
+    <result property="deptCode" column="dept_code" />
+    <result property="num" column="num" />
+  </resultMap>
+
+  <select id="getTrainCount" resultMap="zhgdSafeActivity_other">
+		SELECT
+			COUNT (*) AS num,
+			t.yearMonth
+		FROM
+			(
+				SELECT
+					to_char(a.start_time,'YYYY-MM') AS yearMonth
+				<![CDATA[
+				    FROM ZHGD_SAFE_ACTIVITY a
+			    ]]>
+				WHERE a.disabled = 0
+                <if test="type != null and type != ''">
+                  AND a.type = #{type}
+                </if>
+				AND a.type IS NOT NULL
+                <if test="beginDate != null and beginDate != ''">
+                  AND a.start_time >= to_date( #{beginDate} , 'yyyy-mm-dd')
+                </if>
+                <if test="endDate != null and endDate != ''">
+                  <![CDATA[
+                  AND a.start_time <= to_date( #{endDate} , 'yyyy-mm-dd')
+                   ]]>
+                </if>
+                <if test="deptId != null and deptId != ''">
+                  AND a.dept_id = #{deptId}
+                </if>
+			) t
+			GROUP BY t.yearMonth
+	</select>
+
+  <select id="trainZBCount" resultMap="zhgdSafeActivity_count">
+		SELECT
+			c.dept_type AS dept_code,
+			SUM (c. COUNT) AS num
+		FROM
+			(
+				SELECT
+					a.dept_type,
+					b. COUNT
+				FROM
+					sys_dept a
+				INNER JOIN (
+					SELECT zhgd_dept_id, COUNT (1) AS COUNT
+					FROM
+						ZHGD_SAFE_ACTIVITY
+					WHERE disabled = 0
+                    <if test="type != null and type != ''">
+                      AND type = #{type}
+                    </if>
+					AND type IS NOT NULL
+                    <if test="beginDate != null and beginDate != ''">
+                      AND start_time >= to_date( #{beginDate} , 'yyyy-mm-dd')
+                    </if>
+                    <if test="endDate != null and endDate != ''">
+                      <![CDATA[
+                      AND start_time <= to_date( #{endDate} , 'yyyy-mm-dd')
+                       ]]>
+                    </if>
+                    <if test="deptId != null and deptId != ''">
+                      AND dept_id = #{deptId}
+                    </if>
+					GROUP BY zhgd_dept_id
+				) b ON a.dept_id = b.zhgd_dept_id
+			) c
+		GROUP BY c.dept_type
+	</select>
+
+</mapper>

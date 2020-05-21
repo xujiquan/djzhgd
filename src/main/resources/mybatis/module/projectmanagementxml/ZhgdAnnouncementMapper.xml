@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.djzhgd.module.projectmanagement.mapper.ZhgdAnnouncementMapper">
+    <resultMap id="BaseResultMap" type="com.djzhgd.module.projectmanagement.domain.ZhgdAnnouncement">
+        <id column="ID" jdbcType="DECIMAL" property="id"/>
+        <result column="DEPT_ID" jdbcType="DECIMAL" property="deptId"/>
+        <result column="TENANT_ID" jdbcType="DECIMAL" property="tenantId"/>
+        <result column="ANN_TITLE" jdbcType="VARCHAR" property="annTitle"/>
+        <result column="ANN_DATE" jdbcType="TIMESTAMP" property="annDate"/>
+        <result column="IF_DISPLAY_HOME" jdbcType="DECIMAL" property="ifDisplayHome"/>
+        <result column="ANN_FILE" jdbcType="VARCHAR" property="annFile"/>
+        <result column="OTHER_USERNAME" jdbcType="VARCHAR" property="otherUsername"/>
+        <result column="ANN_IMG" jdbcType="VARCHAR" property="annImg"/>
+        <result column="DISABLED" jdbcType="DECIMAL" property="disabled"/>
+        <result column="CREATE_USERID" jdbcType="DECIMAL" property="createUserid"/>
+        <result column="CREATE_USERNAME" jdbcType="VARCHAR" property="createUsername"/>
+        <result column="CREATE_IP" jdbcType="VARCHAR" property="createIp"/>
+        <result column="CREATE_DATETIME" jdbcType="TIMESTAMP" property="createDatetime"/>
+        <result column="UPDATE_USERID" jdbcType="DECIMAL" property="updateUserid"/>
+        <result column="UPDATE_USERNAME" jdbcType="VARCHAR" property="updateUsername"/>
+        <result column="UPDATE_IP" jdbcType="VARCHAR" property="updateIp"/>
+        <result column="UPDATE_DATETIME" jdbcType="TIMESTAMP" property="updateDatetime"/>
+        <result column="ANN_CONTENT" jdbcType="CLOB" property="annContent"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        ID, DEPT_ID, TENANT_ID, ANN_TITLE, ANN_DATE, IF_DISPLAY_HOME, ANN_FILE, OTHER_USERNAME,
+        ANN_IMG, DISABLED, CREATE_USERID, CREATE_USERNAME, CREATE_IP, CREATE_DATETIME, UPDATE_USERID,
+        UPDATE_USERNAME, UPDATE_IP, UPDATE_DATETIME
+    </sql>
+
+</mapper>

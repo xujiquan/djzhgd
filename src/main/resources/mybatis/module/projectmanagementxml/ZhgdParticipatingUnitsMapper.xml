@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.djzhgd.module.projectmanagement.mapper.ZhgdParticipatingUnitsMapper">
+  <resultMap id="BaseResultMap" type="com.djzhgd.module.projectmanagement.domain.ZhgdParticipatingUnits">
+    <result column="id" jdbcType="INTEGER"  />
+    <result column="dept_id"  property="deptId" />
+    <result column="tenant_id"  property="tenantId" />
+    <result column="unit_name"  property="unitName" />
+    <result column="unit_type"  property="unitType" />
+    <result column="unit_duty"  property="unitDuty" />
+    <result column="disabled"  property="disabled" />
+    <result column="create_userid"  property="createUserid" />
+    <result column="create_username"  property="createUsername" />
+    <result column="create_datetime"  property="createDatetime" />
+    <result column="create_ip"  property="createIp" />
+    <result column="update_userid"  property="updateUserid" />
+    <result column="update_username"  property="updateUsername" />
+    <result column="update_datetime"  property="updateDatetime" />
+    <result column="update_ip"  property="updateIp" />
+    <result column="version"  property="version" />
+  </resultMap>
+
+
+
+
+  <sql id="selectZhgdParticipatingUnitsVo">
+        select id, dept_id, tenant_id, unit_name, unit_type, unit_duty, disabled, create_userid, create_username, create_datetime, create_ip, update_userid, update_username, update_datetime, update_ip,version from ZHGD_PARTICIPATING_UNTIS
+    </sql>
+
+</mapper>

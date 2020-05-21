@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.djzhgd.project.system.mapper.ZxMixingFloorInfoMapper">
+
+    <resultMap type="ZxMixingFloorInfo" id="ZxMixingFloorInfoResult">
+        <result property="floorId"    column="floor_id"    />
+        <result property="deptId"    column="dept_id"    />
+        <result property="parentId"    column="parent_id"    />
+        <result property="floorType"    column="floor_type"    />
+        <result property="floorName"    column="floor_name"    />
+        <result property="productionCapacity"    column="production_capacity"    />
+        <result property="bunkerNum"    column="bunker_num"    />
+        <result property="isBunkerRain"    column="is_bunker_rain"    />
+        <result property="isBunkerHight"    column="is_bunker_hight"    />
+        <result property="isGk"    column="is_gk"    />
+        <result property="swMixingCylinder"    column="sw_mixing_cylinder"    />
+        <result property="swCementCapacity"    column="sw_cement_capacity"    />
+        <result property="lqFuelType"    column="lq_fuel_type"    />
+        <result property="lqAsphaltNum"    column="lq_asphalt_num"    />
+        <result property="lqAsphaltCapacity"    column="lq_asphalt_capacity"    />
+        <result property="lqSbsNum"    column="lq_sbs_num"    />
+        <result property="lqSbsCapacity"    column="lq_sbs_capacity"    />
+        <result property="lqIsStir"    column="lq_is_stir"    />
+        <result property="lqHotBinNum"    column="lq_hot_bin_num"    />
+        <result property="lqKfNum"    column="lq_kf_num"    />
+        <result property="lqKfCapacity"    column="lq_kf_capacity"    />
+        <result property="lqIsRecycling"    column="lq_is_recycling"    />
+        <result property="lqScreenMesh"    column="lq_screen_mesh"    />
+        <result property="lqIsScreen"    column="lq_is_screen"    />
+        <result property="remark"    column="remark"    />
+        <result property="status"    column="status"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectZxMixingFloorInfoVo">
+        select floor_id, dept_id, parent_id, floor_type, floor_name, production_capacity, bunker_num, is_bunker_rain, is_bunker_hight, is_gk, sw_mixing_cylinder, sw_cement_capacity, lq_fuel_type, lq_asphalt_num, lq_asphalt_capacity, lq_sbs_num, lq_sbs_capacity, lq_is_stir, lq_hot_bin_num, lq_kf_num, lq_kf_capacity, lq_is_recycling, lq_screen_mesh, lq_is_screen, remark, status, del_flag, create_by, create_time, update_by, update_time from zx_mixing_floor_info
+    </sql>
+
+    <select id="selectZxMixingFloorInfoList" parameterType="ZxMixingFloorInfo" resultMap="ZxMixingFloorInfoResult">
+        <include refid="selectZxMixingFloorInfoVo"/>
+        <where>
+<!--            <if test="deptId != null "> and dept_id = #{deptId}</if>-->
+            <if test="deptId != null and deptId != 0">
+                AND (dept_id = #{deptId} OR dept_id IN ( SELECT t.dept_id FROM sys_dept t WHERE instr(','||ancestors||',',',${deptId},') <![CDATA[ >]]>0 ))
+            </if>
+            <if test="floorType != null "> and floor_type = #{floorType}</if>
+            <if test="floorName != null  and floorName != ''"> and floor_name like  '%' || #{floorName} || '%'</if>
+            <if test="productionCapacity != null  and productionCapacity != ''"> and production_capacity = #{productionCapacity}</if>
+            <if test="bunkerNum != null  and bunkerNum != ''"> and bunker_num = #{bunkerNum}</if>
+            <if test="isBunkerRain != null  and isBunkerRain != ''"> and is_bunker_rain = #{isBunkerRain}</if>
+            <if test="isBunkerHight != null  and isBunkerHight != ''"> and is_bunker_hight = #{isBunkerHight}</if>
+            <if test="isGk != null  and isGk != ''"> and is_gk = #{isGk}</if>
+            <if test="swMixingCylinder != null  and swMixingCylinder != ''"> and sw_mixing_cylinder = #{swMixingCylinder}</if>
+            <if test="swCementCapacity != null  and swCementCapacity != ''"> and sw_cement_capacity = #{swCementCapacity}</if>
+            <if test="lqFuelType != null  and lqFuelType != ''"> and lq_fuel_type = #{lqFuelType}</if>
+            <if test="lqAsphaltNum != null  and lqAsphaltNum != ''"> and lq_asphalt_num = #{lqAsphaltNum}</if>
+            <if test="lqAsphaltCapacity != null  and lqAsphaltCapacity != ''"> and lq_asphalt_capacity = #{lqAsphaltCapacity}</if>
+            <if test="lqSbsNum != null  and lqSbsNum != ''"> and lq_sbs_num = #{lqSbsNum}</if>
+            <if test="lqSbsCapacity != null  and lqSbsCapacity != ''"> and lq_sbs_capacity = #{lqSbsCapacity}</if>
+            <if test="lqIsStir != null  and lqIsStir != ''"> and lq_is_stir = #{lqIsStir}</if>
+            <if test="lqHotBinNum != null  and lqHotBinNum != ''"> and lq_hot_bin_num = #{lqHotBinNum}</if>
+            <if test="lqKfNum != null  and lqKfNum != ''"> and lq_kf_num = #{lqKfNum}</if>
+            <if test="lqKfCapacity != null  and lqKfCapacity != ''"> and lq_kf_capacity = #{lqKfCapacity}</if>
+            <if test="lqIsRecycling != null  and lqIsRecycling != ''"> and lq_is_recycling = #{lqIsRecycling}</if>
+            <if test="lqScreenMesh != null  and lqScreenMesh != ''"> and lq_screen_mesh = #{lqScreenMesh}</if>
+            <if test="lqIsScreen != null  and lqIsScreen != ''"> and lq_is_screen = #{lqIsScreen}</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+            ${dataScope}
+        </where>
+        <!-- 数据范围过滤 -->
+
+        order by create_time desc
+
+
+    </select>
+
+    <select id="selectZxMixingFloorInfoById" parameterType="Long" resultMap="ZxMixingFloorInfoResult">
+        <include refid="selectZxMixingFloorInfoVo"/>
+        where floor_id = #{floorId}
+    </select>
+
+    <insert id="insertZxMixingFloorInfo" parameterType="ZxMixingFloorInfo" useGeneratedKeys="true" keyProperty="floorId">
+        insert into zx_mixing_floor_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="deptId != null ">dept_id,</if>
+            <if test="parentId != null ">parent_id,</if>
+            <if test="floorType != null ">floor_type,</if>
+            <if test="floorName != null  and floorName != ''">floor_name,</if>
+            <if test="productionCapacity != null  and productionCapacity != ''">production_capacity,</if>
+            <if test="bunkerNum != null  and bunkerNum != ''">bunker_num,</if>
+            <if test="isBunkerRain != null  and isBunkerRain != ''">is_bunker_rain,</if>
+            <if test="isBunkerHight != null  and isBunkerHight != ''">is_bunker_hight,</if>
+            <if test="isGk != null  and isGk != ''">is_gk,</if>
+            <if test="swMixingCylinder != null  and swMixingCylinder != ''">sw_mixing_cylinder,</if>
+            <if test="swCementCapacity != null  and swCementCapacity != ''">sw_cement_capacity,</if>
+            <if test="lqFuelType != null  and lqFuelType != ''">lq_fuel_type,</if>
+            <if test="lqAsphaltNum != null  and lqAsphaltNum != ''">lq_asphalt_num,</if>
+            <if test="lqAsphaltCapacity != null  and lqAsphaltCapacity != ''">lq_asphalt_capacity,</if>
+            <if test="lqSbsNum != null  and lqSbsNum != ''">lq_sbs_num,</if>
+            <if test="lqSbsCapacity != null  and lqSbsCapacity != ''">lq_sbs_capacity,</if>
+            <if test="lqIsStir != null  and lqIsStir != ''">lq_is_stir,</if>
+            <if test="lqHotBinNum != null  and lqHotBinNum != ''">lq_hot_bin_num,</if>
+            <if test="lqKfNum != null  and lqKfNum != ''">lq_kf_num,</if>
+            <if test="lqKfCapacity != null  and lqKfCapacity != ''">lq_kf_capacity,</if>
+            <if test="lqIsRecycling != null  and lqIsRecycling != ''">lq_is_recycling,</if>
+            <if test="lqScreenMesh != null  and lqScreenMesh != ''">lq_screen_mesh,</if>
+            <if test="lqIsScreen != null  and lqIsScreen != ''">lq_is_screen,</if>
+            <if test="remark != null  and remark != ''">remark,</if>
+            <if test="status != null  and status != ''">status,</if>
+            <if test="delFlag != null  and delFlag != ''">del_flag,</if>
+            <if test="createBy != null  and createBy != ''">create_by,</if>
+            <if test="createTime != null ">create_time,</if>
+            <if test="updateBy != null  and updateBy != ''">update_by,</if>
+            <if test="updateTime != null ">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="deptId != null ">#{deptId},</if>
+            <if test="parentId != null ">#{parentId},</if>
+            <if test="floorType != null ">#{floorType},</if>
+            <if test="floorName != null  and floorName != ''">#{floorName},</if>
+            <if test="productionCapacity != null  and productionCapacity != ''">#{productionCapacity},</if>
+            <if test="bunkerNum != null  and bunkerNum != ''">#{bunkerNum},</if>
+            <if test="isBunkerRain != null  and isBunkerRain != ''">#{isBunkerRain},</if>
+            <if test="isBunkerHight != null  and isBunkerHight != ''">#{isBunkerHight},</if>
+            <if test="isGk != null  and isGk != ''">#{isGk},</if>
+            <if test="swMixingCylinder != null  and swMixingCylinder != ''">#{swMixingCylinder},</if>
+            <if test="swCementCapacity != null  and swCementCapacity != ''">#{swCementCapacity},</if>
+            <if test="lqFuelType != null  and lqFuelType != ''">#{lqFuelType},</if>
+            <if test="lqAsphaltNum != null  and lqAsphaltNum != ''">#{lqAsphaltNum},</if>
+            <if test="lqAsphaltCapacity != null  and lqAsphaltCapacity != ''">#{lqAsphaltCapacity},</if>
+            <if test="lqSbsNum != null  and lqSbsNum != ''">#{lqSbsNum},</if>
+            <if test="lqSbsCapacity != null  and lqSbsCapacity != ''">#{lqSbsCapacity},</if>
+            <if test="lqIsStir != null  and lqIsStir != ''">#{lqIsStir},</if>
+            <if test="lqHotBinNum != null  and lqHotBinNum != ''">#{lqHotBinNum},</if>
+            <if test="lqKfNum != null  and lqKfNum != ''">#{lqKfNum},</if>
+            <if test="lqKfCapacity != null  and lqKfCapacity != ''">#{lqKfCapacity},</if>
+            <if test="lqIsRecycling != null  and lqIsRecycling != ''">#{lqIsRecycling},</if>
+            <if test="lqScreenMesh != null  and lqScreenMesh != ''">#{lqScreenMesh},</if>
+            <if test="lqIsScreen != null  and lqIsScreen != ''">#{lqIsScreen},</if>
+            <if test="remark != null  and remark != ''">#{remark},</if>
+            <if test="status != null  and status != ''">#{status},</if>
+            <if test="delFlag != null  and delFlag != ''">#{delFlag},</if>
+            <if test="createBy != null  and createBy != ''">#{createBy},</if>
+            <if test="createTime != null ">#{createTime},</if>
+            <if test="updateBy != null  and updateBy != ''">#{updateBy},</if>
+            <if test="updateTime != null ">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateZxMixingFloorInfo" parameterType="ZxMixingFloorInfo">
+        update zx_mixing_floor_info
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="deptId != null ">dept_id = #{deptId},</if>
+            <if test="parentId != null ">parent_id = #{parentId},</if>
+            <if test="floorType != null ">floor_type = #{floorType},</if>
+            <if test="floorName != null  and floorName != ''">floor_name = #{floorName},</if>
+            <if test="productionCapacity != null  and productionCapacity != ''">production_capacity = #{productionCapacity},</if>
+            <if test="bunkerNum != null  and bunkerNum != ''">bunker_num = #{bunkerNum},</if>
+            <if test="isBunkerRain != null  and isBunkerRain != ''">is_bunker_rain = #{isBunkerRain},</if>
+            <if test="isBunkerHight != null  and isBunkerHight != ''">is_bunker_hight = #{isBunkerHight},</if>
+            <if test="isGk != null  and isGk != ''">is_gk = #{isGk},</if>
+            <if test="swMixingCylinder != null  and swMixingCylinder != ''">sw_mixing_cylinder = #{swMixingCylinder},</if>
+            <if test="swCementCapacity != null  and swCementCapacity != ''">sw_cement_capacity = #{swCementCapacity},</if>
+            <if test="lqFuelType != null  and lqFuelType != ''">lq_fuel_type = #{lqFuelType},</if>
+            <if test="lqAsphaltNum != null  and lqAsphaltNum != ''">lq_asphalt_num = #{lqAsphaltNum},</if>
+            <if test="lqAsphaltCapacity != null  and lqAsphaltCapacity != ''">lq_asphalt_capacity = #{lqAsphaltCapacity},</if>
+            <if test="lqSbsNum != null  and lqSbsNum != ''">lq_sbs_num = #{lqSbsNum},</if>
+            <if test="lqSbsCapacity != null  and lqSbsCapacity != ''">lq_sbs_capacity = #{lqSbsCapacity},</if>
+            <if test="lqIsStir != null  and lqIsStir != ''">lq_is_stir = #{lqIsStir},</if>
+            <if test="lqHotBinNum != null  and lqHotBinNum != ''">lq_hot_bin_num = #{lqHotBinNum},</if>
+            <if test="lqKfNum != null  and lqKfNum != ''">lq_kf_num = #{lqKfNum},</if>
+            <if test="lqKfCapacity != null  and lqKfCapacity != ''">lq_kf_capacity = #{lqKfCapacity},</if>
+            <if test="lqIsRecycling != null  and lqIsRecycling != ''">lq_is_recycling = #{lqIsRecycling},</if>
+            <if test="lqScreenMesh != null  and lqScreenMesh != ''">lq_screen_mesh = #{lqScreenMesh},</if>
+            <if test="lqIsScreen != null  and lqIsScreen != ''">lq_is_screen = #{lqIsScreen},</if>
+            <if test="remark != null  and remark != ''">remark = #{remark},</if>
+            <if test="status != null  and status != ''">status = #{status},</if>
+            <if test="delFlag != null  and delFlag != ''">del_flag = #{delFlag},</if>
+            <if test="createBy != null  and createBy != ''">create_by = #{createBy},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+            <if test="updateBy != null  and updateBy != ''">update_by = #{updateBy},</if>
+            <if test="updateTime != null ">update_time = #{updateTime},</if>
+        </trim>
+        where floor_id = #{floorId}
+    </update>
+
+    <delete id="deleteZxMixingFloorInfoById" parameterType="Long">
+        delete from zx_mixing_floor_info where floor_id = #{floorId}
+    </delete>
+
+    <delete id="deleteZxMixingFloorInfoByIds" parameterType="String">
+        delete from zx_mixing_floor_info where floor_id in
+        <foreach item="floorId" collection="array" open="(" separator="," close=")">
+            #{floorId}
+        </foreach>
+    </delete>
+
+</mapper>

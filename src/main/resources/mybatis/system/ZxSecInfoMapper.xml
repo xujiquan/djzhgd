@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.djzhgd.project.system.mapper.ZxSecInfoMapper">
+
+    <resultMap type="ZxSecInfo" id="ZxSecInfoResult">
+        <result property="deptId"    column="dept_id"    />
+        <result property="parentId"    column="parent_id"    />
+        <result property="ancestors"    column="ancestors"    />
+        <result property="deptName"    column="dept_name"    />
+        <result property="contractCode"    column="contract_code"    />
+        <result property="customerInfo"    column="customer_info"    />
+        <result property="customerName"    column="customer_name"    />
+        <result property="customerAddress"    column="customer_address"    />
+        <result property="customerLeader"    column="customer_leader"    />
+        <result property="customerPhone"    column="customer_phone"    />
+        <result property="projectInfo"    column="project_info"    />
+        <result property="projectLeader"    column="project_leader"    />
+        <result property="projectLeaderId"    column="project_leader_id"    />
+        <result property="projectTeam"    column="project_team"    />
+        <result property="reportInfo"    column="report_info"    />
+        <result property="reportPrepare"    column="report_prepare"    />
+        <result property="reportReview"    column="report_review"    />
+        <result property="reportAudit"    column="report_audit"    />
+        <result property="contractMoney"    column="contract_money"    />
+        <result property="contractCycle"    column="contract_cycle"    />
+        <result property="contractCycleStartTime"    column="contract_cycle_start_time"    />
+        <result property="contractCycleEndTime"    column="contract_cycle_end_time"    />
+        <result property="remark"    column="remark"    />
+        <result property="orderNum"    column="order_num"    />
+        <result property="status"    column="status"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectZxSecInfoVo">
+        select dept_id, parent_id, ancestors, dept_name, contract_code, customer_info, customer_name, customer_address, customer_leader, customer_phone, project_info, project_leader, project_leader_id, project_team, report_info, report_prepare, report_review, report_audit, contract_money, contract_cycle, contract_cycle_start_time, contract_cycle_end_time, remark, order_num, status, del_flag, create_by, create_time, update_by, update_time from zx_project_info
+    </sql>
+
+    <select id="selectZxSecInfoList" parameterType="ZxSecInfo" resultMap="ZxSecInfoResult">
+        <include refid="selectZxSecInfoVo"/>
+        <where>
+            <if test="parentId != null "> and parent_id = #{parentId}</if>
+            <if test="deptName != null  and deptName != ''"> and dept_name like  '%' || #{detName} || '%'</if>
+            <if test="contractCode != null  and contractCode != ''"> and contract_code like  '%' || #{contractCode} || '%'</if>
+            <if test="customerName != null  and customerName != ''"> and customer_name like  '%' || #{customerName} || '%'</if>
+            <if test="contractCycle != null  and contractCycle != ''"> and contract_cycle = #{contractCycle}</if>
+            <if test="contractCycleStartTime != null "> and contract_cycle_start_time = #{contractCycleStartTime}</if>
+            <if test="contractCycleEndTime != null "> and contract_cycle_end_time = #{contractCycleEndTime}</if>
+        </where>
+        order by create_time desc
+    </select>
+
+    <select id="selectZxSecInfoById" parameterType="Long" resultMap="ZxSecInfoResult">
+        <include refid="selectZxSecInfoVo"/>
+        where dept_id = #{deptId}
+    </select>
+
+    <insert id="insertZxSecInfo" parameterType="ZxSecInfo" useGeneratedKeys="true" keyProperty="deptId">
+        insert into zx_project_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="parentId != null ">parent_id,</if>
+            <if test="ancestors != null  and ancestors != ''">ancestors,</if>
+            <if test="deptName != null  and deptName != ''">dept_name,</if>
+            <if test="contractCode != null  and contractCode != ''">contract_code,</if>
+            <if test="customerInfo != null  and customerInfo != ''">customer_info,</if>
+            <if test="customerName != null  and customerName != ''">customer_name,</if>
+            <if test="customerAddress != null  and customerAddress != ''">customer_address,</if>
+            <if test="customerLeader != null  and customerLeader != ''">customer_leader,</if>
+            <if test="customerPhone != null  and customerPhone != ''">customer_phone,</if>
+            <if test="projectInfo != null  and projectInfo != ''">project_info,</if>
+            <if test="projectLeader != null  and projectLeader != ''">project_leader,</if>
+            <if test="projectLeaderId != null ">project_leader_id,</if>
+            <if test="projectTeam != null  and projectTeam != ''">project_team,</if>
+            <if test="reportInfo != null  and reportInfo != ''">report_info,</if>
+            <if test="reportPrepare != null  and reportPrepare != ''">report_prepare,</if>
+            <if test="reportReview != null  and reportReview != ''">report_review,</if>
+            <if test="reportAudit != null  and reportAudit != ''">report_audit,</if>
+            <if test="contractMoney != null  and contractMoney != ''">contract_money,</if>
+            <if test="contractCycle != null  and contractCycle != ''">contract_cycle,</if>
+            <if test="contractCycleStartTime != null ">contract_cycle_start_time,</if>
+            <if test="contractCycleEndTime != null ">contract_cycle_end_time,</if>
+            <if test="remark != null  and remark != ''">remark,</if>
+            <if test="orderNum != null ">order_num,</if>
+            <if test="status != null  and status != ''">status,</if>
+            <if test="delFlag != null  and delFlag != ''">del_flag,</if>
+            <if test="createBy != null  and createBy != ''">create_by,</if>
+            <if test="createTime != null ">create_time,</if>
+            <if test="updateBy != null  and updateBy != ''">update_by,</if>
+            <if test="updateTime != null ">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="parentId != null ">#{parentId},</if>
+            <if test="ancestors != null  and ancestors != ''">#{ancestors},</if>
+            <if test="deptName != null  and deptName != ''">#{deptName},</if>
+            <if test="contractCode != null  and contractCode != ''">#{contractCode},</if>
+            <if test="customerInfo != null  and customerInfo != ''">#{customerInfo},</if>
+            <if test="customerName != null  and customerName != ''">#{customerName},</if>
+            <if test="customerAddress != null  and customerAddress != ''">#{customerAddress},</if>
+            <if test="customerLeader != null  and customerLeader != ''">#{customerLeader},</if>
+            <if test="customerPhone != null  and customerPhone != ''">#{customerPhone},</if>
+            <if test="projectInfo != null  and projectInfo != ''">#{projectInfo},</if>
+            <if test="projectLeader != null  and projectLeader != ''">#{projectLeader},</if>
+            <if test="projectLeaderId != null ">#{projectLeaderId},</if>
+            <if test="projectTeam != null  and projectTeam != ''">#{projectTeam},</if>
+            <if test="reportInfo != null  and reportInfo != ''">#{reportInfo},</if>
+            <if test="reportPrepare != null  and reportPrepare != ''">#{reportPrepare},</if>
+            <if test="reportReview != null  and reportReview != ''">#{reportReview},</if>
+            <if test="reportAudit != null  and reportAudit != ''">#{reportAudit},</if>
+            <if test="contractMoney != null  and contractMoney != ''">#{contractMoney},</if>
+            <if test="contractCycle != null  and contractCycle != ''">#{contractCycle},</if>
+            <if test="contractCycleStartTime != null ">#{contractCycleStartTime},</if>
+            <if test="contractCycleEndTime != null ">#{contractCycleEndTime},</if>
+            <if test="remark != null  and remark != ''">#{remark},</if>
+            <if test="orderNum != null ">#{orderNum},</if>
+            <if test="status != null  and status != ''">#{status},</if>
+            <if test="delFlag != null  and delFlag != ''">#{delFlag},</if>
+            <if test="createBy != null  and createBy != ''">#{createBy},</if>
+            <if test="createTime != null ">#{createTime},</if>
+            <if test="updateBy != null  and updateBy != ''">#{updateBy},</if>
+            <if test="updateTime != null ">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateZxSecInfo" parameterType="ZxSecInfo">
+        update zx_project_info
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="parentId != null ">parent_id = #{parentId},</if>
+            <if test="ancestors != null  and ancestors != ''">ancestors = #{ancestors},</if>
+            <if test="deptName != null  and deptName != ''">dept_name = #{deptName},</if>
+            <if test="contractCode != null  and contractCode != ''">contract_code = #{contractCode},</if>
+            <if test="customerInfo != null  and customerInfo != ''">customer_info = #{customerInfo},</if>
+            <if test="customerName != null  and customerName != ''">customer_name = #{customerName},</if>
+            <if test="customerAddress != null  and customerAddress != ''">customer_address = #{customerAddress},</if>
+            <if test="customerLeader != null  and customerLeader != ''">customer_leader = #{customerLeader},</if>
+            <if test="customerPhone != null  and customerPhone != ''">customer_phone = #{customerPhone},</if>
+            <if test="projectInfo != null  and projectInfo != ''">project_info = #{projectInfo},</if>
+            <if test="projectLeader != null  and projectLeader != ''">project_leader = #{projectLeader},</if>
+            <if test="projectLeaderId != null ">project_leader_id = #{projectLeaderId},</if>
+            <if test="projectTeam != null  and projectTeam != ''">project_team = #{projectTeam},</if>
+            <if test="reportInfo != null  and reportInfo != ''">report_info = #{reportInfo},</if>
+            <if test="reportPrepare != null  and reportPrepare != ''">report_prepare = #{reportPrepare},</if>
+            <if test="reportReview != null  and reportReview != ''">report_review = #{reportReview},</if>
+            <if test="reportAudit != null  and reportAudit != ''">report_audit = #{reportAudit},</if>
+            <if test="contractMoney != null  and contractMoney != ''">contract_money = #{contractMoney},</if>
+            <if test="contractCycle != null  and contractCycle != ''">contract_cycle = #{contractCycle},</if>
+            <if test="contractCycleStartTime != null ">contract_cycle_start_time = #{contractCycleStartTime},</if>
+            <if test="contractCycleEndTime != null ">contract_cycle_end_time = #{contractCycleEndTime},</if>
+            <if test="remark != null  and remark != ''">remark = #{remark},</if>
+            <if test="orderNum != null ">order_num = #{orderNum},</if>
+            <if test="status != null  and status != ''">status = #{status},</if>
+            <if test="delFlag != null  and delFlag != ''">del_flag = #{delFlag},</if>
+            <if test="createBy != null  and createBy != ''">create_by = #{createBy},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+            <if test="updateBy != null  and updateBy != ''">update_by = #{updateBy},</if>
+            <if test="updateTime != null ">update_time = #{updateTime},</if>
+        </trim>
+        where dept_id = #{deptId}
+    </update>
+
+    <delete id="deleteZxSecInfoById" parameterType="Long">
+        delete from zx_project_info where dept_id = #{deptId}
+    </delete>
+
+    <delete id="deleteZxSecInfoByIds" parameterType="String">
+        delete from zx_project_info where dept_id in
+        <foreach item="deptId" collection="array" open="(" separator="," close=")">
+            #{deptId}
+        </foreach>
+    </delete>
+
+</mapper>

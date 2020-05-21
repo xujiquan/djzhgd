@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+
+    <context id="mybatis" targetRuntime="MyBatis3">
+        <!-- 控制注释 -->
+        <commentGenerator>
+            <!-- 是否去除所有自动生成的注释文件 -->
+            <property name="suppressAllComments" value="true"/>
+            <!-- 是否去除所有自动生成的文件的时间戳，默认为false -->
+            <property name="suppressDate" value="false"/>
+        </commentGenerator>
+
+        <!--devDB mysql-->
+        <jdbcConnection driverClass="oracle.jdbc.OracleDriver"
+                        connectionURL="jdbc:oracle:thin:@192.168.1.147:1521/orcl"
+                        userId="zhgd"
+                        password="zhgd"/>
+
+        <javaTypeResolver>
+            <!-- 把jdbc中的decimal与numberic类型转化为integer类型 -->
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <!-- 数据库表对应的entity实体,根据自己的路径修改 -->
+        <javaModelGenerator targetPackage="com.djzhgd.module.projectmanagement.domain" targetProject="./djzhgd-code/djzhgd/src/main/java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+        <!-- 控制Model的xmlMapper文件,根据自己的路径修改 -->
+        <sqlMapGenerator targetPackage="resources.mybatis.module.projectmanagementxml" targetProject="./djzhgd-code/djzhgd/src/main">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+        <!-- 控制mapper的Dao接口,根据自己的路径修改 -->
+        <javaClientGenerator targetPackage="com.djzhgd.module.projectmanagement.mapper" type="XMLMAPPER" targetProject="./djzhgd-code/djzhgd/src/main/java">
+            <property name="enablesubpackages" value="true"/>
+            <property name="methodNameCalculator" value="extended"/>
+        </javaClientGenerator>
+        <!--TableName-->
+        <!-- table:数据库对应的表名称; Table:需要生成的Entity、Dao、Mapper.xml文件的名字 -->
+        <table tableName="ZHGD_MEETING_AGENDA" domainObjectName="Zhgdmeetingagenda"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+
+    </context>
+</generatorConfiguration>

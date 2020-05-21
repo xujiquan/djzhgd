@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.djzhgd.module.material.mapper.ZhgdMaterielDesignUsageMapper">
+
+	<resultMap id="zhgdMaterielDesignUsage" type="com.djzhgd.module.material.domain.ZhgdMaterielDesignUsage">
+		<id column="id" property="id" />
+		<result column="material_code"  property="materialCode" />
+		<result column="material_name"  property="materialName" />
+		<result column="number"  property="number" />
+		<result column="create_userid"  property="createUserid" />
+		<result column="create_username"  property="createUsername" />
+		<result column="create_time"  property="createTime" />
+		<result column="disabled"  property="disabled" />
+		<result column="disabled"  property="disabled" />
+		<result property="tenantId" column="tenant_id"/>
+		<result property="deptId" column="dept_id" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+    id, material_code, material_name, number, create_userid, create_username, create_time,
+    disabled,tenant_id,dept_id
+  </sql>
+	<select id="selectAll" resultMap="zhgdMaterielDesignUsage" parameterType="map">
+			select
+			<include refid="Base_Column_List"></include>
+			from
+			materiel_design_usage
+			where dept_id = #{deptId}
+	</select>
+</mapper>
